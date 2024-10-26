@@ -11,3 +11,12 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  taskmanagemnetdb:
+    container_name: taskmanagemnetdb
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=123456@Aa
+    restart: always
+    ports:
+      - "1433:1433"

@@ -6,3 +6,7 @@ services:
     build:
       context: .
       dockerfile: TaskManagement/Dockerfile
+
+
+  taskmanagemnetdb:
+    image: mcr.microsoft.com/mssql/server  
