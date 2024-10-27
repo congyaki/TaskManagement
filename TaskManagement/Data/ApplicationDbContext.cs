@@ -19,6 +19,7 @@ namespace TaskManagement.Data
         public DbSet<Entities.Task> Tasks { get; set; }
         public DbSet<TaskLabel> TaskLabels { get; set; }
         public DbSet<TaskUser> TaskUsers { get; set; }
+        //public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
