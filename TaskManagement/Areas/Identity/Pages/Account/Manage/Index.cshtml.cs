@@ -119,6 +119,13 @@ namespace TaskManagement.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            if (Input.DepartmentId != user.DepartmentId)
+            {
+                user.DepartmentId = Input.DepartmentId;
+            }
+
+            await _userManager.UpdateAsync(user);
+
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
