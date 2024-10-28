@@ -9,8 +9,9 @@ namespace TaskManagement.Data.Configurations
         public void Configure(EntityTypeBuilder<TaskUser> builder)
         {
             builder.HasOne<User>()
-            .WithMany()
-            .HasForeignKey(t => t.UserId);
+                .WithMany()
+                .HasForeignKey(t => t.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne<Entities.Task>()
             .WithMany()

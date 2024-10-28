@@ -14,7 +14,7 @@ namespace TaskManagement.Entities
         public int TaskId { get; set; }  // Foreign Key to TblTask
 
         [Column("USER_ID")]
-        public int UserId { get; set; }  // Foreign Key to User (assuming there is a User table)
+        public string UserId { get; set; }  // Foreign Key to User (assuming there is a User table)
 
         [Column("CREATED_BY")]
         public string CreatedBy { get; set; }
