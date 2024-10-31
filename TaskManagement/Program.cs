@@ -1,15 +1,16 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using TaskManagement.Data;
 using TaskManagement.Data.Extensions;
 using Microsoft.AspNetCore.Identity;
 using TaskManagement.Entities;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("Database");
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(connectionString);
@@ -17,6 +18,53 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+//builder.Services.AddIdentity<User, IdentityRole>(options =>
+//    options.SignIn.RequireConfirmedAccount = true)
+//    .AddEntityFrameworkStores<ApplicationDbContext>()
+//    .AddDefaultTokenProviders();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    // Overwrite Default User settings.
+    
+    options.User.RequireUniqueEmail = false;
+
+});
+
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromHours(36);
+        options.SlidingExpiration = true;
+    });
+
+//Tương đương code trên
+//builder.Services.ConfigureApplicationCookie(o => {
+//    // Overwrite Default settings.
+//    o.ExpireTimeSpan = TimeSpan.FromHours(36);
+//    //o.SlidingExpiration = true;
+//});
+
+
+//builder.Services.ConfigureApplicationCookie(options =>
+//{
+//    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+//    options.Cookie.Name = "TaskManagementCookie";
+//    options.Cookie.HttpOnly = true;
+//    options.ExpireTimeSpan = TimeSpan.FromHours(3);
+//    options.LoginPath = "/Identity/Account/Login";
+//    // ReturnUrlParameter requires 
+//    //using Microsoft.AspNetCore.Authentication.Cookies;
+//    options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+//    options.SlidingExpiration = true;
+//});
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -36,8 +84,16 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
+
+//Không sử dụng authentication từ hệ thống bên ngoài như OAuth2
+var cookiePolicyOptions = new CookiePolicyOptions
+{
+    MinimumSameSitePolicy = SameSiteMode.Strict,
+};
+
+app.UseCookiePolicy(cookiePolicyOptions);
+
 app.UseAuthentication();;
 
 app.UseAuthorization();
