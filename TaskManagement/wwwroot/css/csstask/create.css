@@ -1,0 +1,29 @@
+﻿.create {
+    background-color: #FFFFFF;
+    width: 95%;
+}
+hr{
+    width: 95%;
+    margin-right: 75px;
+}
+.buttoncreate {
+    max-width: 100%;
+    width: 77%;
+    margin-left: 45px;
+    padding-left: 10px;
+}
+.label {
+    max-width: 250px;
+    width: 240px;
+    font-weight: bold;
+}
+.datestart{
+    width: 38.5%;
+    margin-left: 45px;
+}
+.dateend {
+    width: 38.5%;
+}
+.textarea {
+    margin-left: 45px;
+}

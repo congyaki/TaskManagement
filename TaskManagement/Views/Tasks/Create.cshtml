@@ -1,0 +1,89 @@
+﻿@model TaskManagement.Entities.Task
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="/css/sb-admin-2.min.css" rel="stylesheet">
+<h2 class=" pl-5 pt-5 font-weight-bold">THÊM CÔNG VIỆC</h2>
+
+<div class="pl-5 create mx-5">
+    <h4 class="pt-3 font-weight-bold">Thêm công việc mới</h4>
+    <hr />
+    <div class="">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group d-flex w-100">
+                <label asp-for="Title" class="label">Tiêu đề</label>
+                <input asp-for="Title" class="buttoncreate" placeholder="Nhập tiêu đề" />
+                @* <span asp-validation-for="Title" class="text-danger"></span> *@
+            </div>
+            <div class="form-group d-flex">
+                <label asp-for="StartDate" class="label">Thời gian</label>
+                <input asp-for="StartDate" class="datestart" />
+                <input asp-for="EndDate" class="dateend" />
+                @* <span asp-validation-for="StartDate" class="text-danger"></span> *@
+            </div>
+            <div class="form-group d-flex">
+                <label asp-for="Priority" class="label">Mức độ ưu tiên</label>
+                <input asp-for="Priority" class="buttoncreate" placeholder="Chọn mức độ ưu tiên" />
+                @* <span asp-validation-for="Priority" class="text-danger"></span> *@
+            </div>
+            <div class="form-group d-flex">
+                <label asp-for="EstimatedTime" class="label">Thời gian dự kiến hoàn thành</label>
+                <input asp-for="EstimatedTime" class="buttoncreate" placeholder="Thời gian dự kiến hoàn thành" />
+                @* <span asp-validation-for="EstimatedTime" class="text-danger"></span> *@
+            </div>
+            <div class="form-group d-flex">
+                <label asp-for="Description" class="label">Mô tả</label>
+                <textarea asp-for="Description" id=" message" name="message" rows="4" cols="50" class="textarea" placeholder="Nhập mô tả..."></textarea>
+                @* <span asp-validation-for="Description" class="text-danger"></span> *@
+            </div>
+            <div class="form-group d-flex">
+                <label asp-for="Status" class="label">Trạng thái</label>
+                <input asp-for="Status" class="buttoncreate" />
+                @* <span asp-validation-for="Status" class="text-danger"></span> *@
+            </div>
+            <div class="form-group d-flex">
+                <label asp-for="CreatedBy" class="label">Người giao việc</label>
+                <select class="buttoncreate" asp-items="ViewBag.DepartmentId" ></select>
+                @* <span asp-validation-for="CreatedBy" class="text-danger"></span> *@
+            </div>
+            <div class="form-group d-flex">
+                <label asp-for="CreatedAt" class="label">Người thực hiện</label>
+                <select class="buttoncreate" asp-items="ViewBag.DepartmentId"></select>
+                @* <span asp-validation-for="CreatedAt" class="text-danger"></span> *@
+            </div>
+            <div class="form-group d-flex">
+                <label asp-for="LastModifiedBy" class="label">Người sửa đổi</label>
+                <select class="buttoncreate" asp-items="ViewBag.DepartmentId"></select>
+               @*  <span asp-validation-for="LastModifiedBy" class="text-danger"></span> *@
+            </div>
+            <div class="form-group d-flex">
+                <label asp-for="LastModifiedAt" class="label">Thời gian sửa đổi</label>
+                <input asp-for="LastModifiedAt" class="buttoncreate" />
+                @* <span asp-validation-for="LastModifiedAt" class="text-danger"></span> *@
+            </div>
+            <div class="form-group d-flex">
+                <label asp-for="DepartmentId" class="label">Mã phòng ban</label>
+                <select asp-for="DepartmentId" class="buttoncreate" asp-items="ViewBag.DepartmentId"></select>
+            </div>
+            <div class="form-group d-flex">
+                <label asp-for="ParentId" class="label"></label>
+                <select asp-for="ParentId" class="buttoncreate" asp-items="ViewBag.ParentId"></select>
+            </div>
+            <div class="form-group d-flex">
+                <input type="submit" value="Thêm" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="pt-5">
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@* @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} *@
