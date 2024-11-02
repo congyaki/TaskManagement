@@ -1,0 +1,46 @@
+﻿@model IEnumerable<TaskManagement.Entities.Department>
+
+@{
+    ViewData["Title"] = "Danh sách phòng ban";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mb-4 d-flex justify-content-between align-items-center">
+    <h2>Danh sách phòng ban</h2>
+    <a class="btn btn-primary" asp-action="Create">Thêm phòng ban mới</a>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Code)</th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.CreatedBy)</th>
+            <th>@Html.DisplayNameFor(model => model.CreatedAt)</th>
+            <th>@Html.DisplayNameFor(model => model.LastModifiedBy)</th>
+            <th>@Html.DisplayNameFor(model => model.LastModifiedAt)</th>
+            <th class="text-center">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Code)</td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.CreatedBy)</td>
+                <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
+                <td>@Html.DisplayFor(modelItem => item.LastModifiedBy)</td>
+                <td>@Html.DisplayFor(modelItem => item.LastModifiedAt)</td>
+                <td class="text-center">
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-sm btn-warning mr-3" asp-action="Edit" asp-route-id="@item.Id">Sửa</a>
+                        <a class="btn btn-sm btn-info mr-3" asp-action="Details" asp-route-id="@item.Id">Chi tiết</a>
+                        <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">Xóa</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

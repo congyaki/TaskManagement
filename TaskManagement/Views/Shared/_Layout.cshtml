@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>@ViewData["Title"] - TaskManagement</title>
-
+    <link rel="icon" type="image/x-icon" href="~/img/DNU.png">
     <!-- Custom fonts for this template-->
     <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -31,7 +31,7 @@
         <ul class="navbar-nav bg-gradient-warning sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-action="Index" asp-controller="Home">
                 <div class="sidebar-brand-icon rotate-n-15">
                     @* <img src="~/img/dn" alt="Alternate Text"/> *@
                     <i class="fas fa-laugh-wink"></i>
@@ -103,7 +103,7 @@
 
             <!-- Nav Item - Home -->
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" asp-action="Index" asp-controller="Home">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Trang chủ</span>
                 </a>
@@ -111,7 +111,7 @@
 
             <!-- Nav Item - Department -->
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" asp-action="Index" asp-controller="Departments">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Bộ môn</span>
                 </a>
@@ -119,9 +119,9 @@
 
             <!-- Nav Item - User -->
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Người dùng</span>
+                    <span>Tài khoản</span>
                 </a>
             </li>
 
