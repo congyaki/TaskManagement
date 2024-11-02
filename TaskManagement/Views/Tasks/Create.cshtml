@@ -46,35 +46,16 @@
                 @* <span asp-validation-for="Status" class="text-danger"></span> *@
             </div>
             <div class="form-group d-flex">
-                <label asp-for="CreatedBy" class="label">Người giao việc</label>
-                <select class="buttoncreate" asp-items="ViewBag.DepartmentId" ></select>
-                @* <span asp-validation-for="CreatedBy" class="text-danger"></span> *@
-            </div>
-            <div class="form-group d-flex">
                 <label asp-for="CreatedAt" class="label">Người thực hiện</label>
                 <select class="buttoncreate" asp-items="ViewBag.DepartmentId"></select>
                 @* <span asp-validation-for="CreatedAt" class="text-danger"></span> *@
-            </div>
-            <div class="form-group d-flex">
-                <label asp-for="LastModifiedBy" class="label">Người sửa đổi</label>
-                <select class="buttoncreate" asp-items="ViewBag.DepartmentId"></select>
-               @*  <span asp-validation-for="LastModifiedBy" class="text-danger"></span> *@
-            </div>
-            <div class="form-group d-flex">
-                <label asp-for="LastModifiedAt" class="label">Thời gian sửa đổi</label>
-                <input asp-for="LastModifiedAt" class="buttoncreate" />
-                @* <span asp-validation-for="LastModifiedAt" class="text-danger"></span> *@
             </div>
             <div class="form-group d-flex">
                 <label asp-for="DepartmentId" class="label">Mã phòng ban</label>
                 <select asp-for="DepartmentId" class="buttoncreate" asp-items="ViewBag.DepartmentId"></select>
             </div>
             <div class="form-group d-flex">
-                <label asp-for="ParentId" class="label"></label>
-                <select asp-for="ParentId" class="buttoncreate" asp-items="ViewBag.ParentId"></select>
-            </div>
-            <div class="form-group d-flex">
-                <input type="submit" value="Thêm" class="btn btn-primary" />
+                <input type="submit" value="Thêm" class="btn btn-primary mb-5" />
             </div>
         </form>
     </div>

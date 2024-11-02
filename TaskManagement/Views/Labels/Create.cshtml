@@ -1,0 +1,69 @@
+﻿@model TaskManagement.Entities.Label
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-customized mt-5">
+    <div class="card-customized p-4">
+        <h3 class="text-center mb-4 card-customized-header">Tạo Nhãn Dán</h3>
+        <form>
+            <div class="mb-3">
+                <label for="code" class="form-label">Code <span class="text-danger">*</span></label>
+                <input type="text"
+                       class="control-customized"
+                       id="code"
+                       placeholder="Nhập vào Code"
+                       required />
+            </div>
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+                <input type="text"
+                       class="control-customized"
+                       id="name"
+                       placeholder="Nhập vào Name"
+                       required />
+            </div>
+
+            <div class="mb-3">
+                <label for="color" class="form-label">Color <span class="text-danger">*</span></label>
+                <input type="color"
+                       class="control-customized form-control-color"
+                       id="color"
+                       value="#000000"
+                       required />
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Mô tả</label>
+                <textarea id="description" class="control-customized" rows="3"></textarea>
+            </div>
+
+            <div class="mb-4">
+                <label for="status" class="form-label">Trạng thái <span class="text-danger">*</span></label>
+                <select class="select-customized" id="status" required>
+                    <option selected>Tồn đọng</option>
+                    <option>Đang thực hiện</option>
+                    <option>Hoàn thành</option>
+                </select>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn-customized px-4">
+                    Tạo Nhãn Dán
+                </button>
+                <button type="button" class="btn btn-outline-secondary px-4">
+                    Quay lại
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -19,6 +19,8 @@
     <!-- Custom styles for this template-->
     <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="~/css/csstask/create.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.0.0/tinymce.min.css" rel="stylesheet" />
+    <link href="~/css/csslabels/createlabel.css" rel="stylesheet">
 
 </head>
 
@@ -127,7 +129,7 @@
 
             <!-- Nav Item - Label -->
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" asp-action="Index" asp-controller="Labels">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Nhãn dán</span>
                 </a>
@@ -452,6 +454,17 @@
     <!-- Page level custom scripts -->
     <script src="~/js/demo/chart-area-demo.js"></script>
     <script src="~/js/demo/chart-pie-demo.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.0.0/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: "#description",
+            menubar: false,
+            toolbar:
+                "undo redo | bold italic underline | alignleft aligncenter alignright | bullist numlist | outdent indent | removeformat",
+            height: 200,
+        });
+    </script>
+   
     @RenderSection("Scripts", required: false)
 </body>
 
