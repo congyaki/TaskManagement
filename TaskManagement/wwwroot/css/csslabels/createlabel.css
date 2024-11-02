@@ -1,0 +1,52 @@
+﻿/* Custom Button Styling */
+.btn-customized {
+    background-color: #e6913a ;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+
+    .btn-customized:hover {
+        background-color: #fff;
+        color: #e6913a;
+        border: 2px solid #e6913a;
+    }
+
+/* Custom Card Styling */
+.card-customized {
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+}
+
+/* Header Styling */
+.card-customized-header h3 {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Input and Select Styling */
+.control-customized:focus,
+.select-customized:focus {
+    border-color: #e6913a;
+    box-shadow: 0 0 5px rgba(230, 145, 58, 0.4);
+}
+
+/* Centered Container */
+.container-customized {
+    max-width: 600px;
+    margin: auto;
+}
+
+/* Custom Background for Body */
+.body-customized {
+    background-color: #f4f6f8;
+}
+
+/* Responsive Card */
+@media (max-width: 576px) {
+    .card-customized {
+        padding: 20px;
+    }
+}
