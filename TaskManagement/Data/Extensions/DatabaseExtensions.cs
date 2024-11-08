@@ -28,7 +28,7 @@ namespace TaskManagement.Data.Extensions
 
         private static async Task SeedRoleAsync(ApplicationDbContext context, IServiceProvider serviceProvider)
         {
-            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<Role>>();
 
             foreach (var role in InitialData.Roles)
             {

@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations;
 namespace TaskManagement.Entities
 {
     [Table("TBL_DM_DEPARTMENTS")]
-    public class Department
+    public class Department : BaseEntity<int>
     {
-        [Key]
-        [Column("ID")]
-        public int Id { get; set; }
 
         [Column("CODE")]
         public string Code { get; set; }

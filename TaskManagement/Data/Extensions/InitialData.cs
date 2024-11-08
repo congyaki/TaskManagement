@@ -8,15 +8,13 @@ namespace TaskManagement.Data.Extensions
     {
         public static IEnumerable<User> Users => new List<User>()
         {
-            new User
-            {
+            new() {
                 UserName = "admin@example.com",
                 Email = "admin@example.com",
                 EmailConfirmed = true,
                 DepartmentId = 1,
             },
-            new User
-            {
+            new() {
                 UserName = "user@example.com",
                 Email = "user@example.com",
                 EmailConfirmed = true,
@@ -25,17 +23,16 @@ namespace TaskManagement.Data.Extensions
 
         };
 
-        public static IEnumerable<IdentityRole> Roles => new List<IdentityRole>()
+        public static IEnumerable<Role> Roles => new List<Role>()
         {
-            new IdentityRole("Admin"),
-            new IdentityRole("User")
+            new("Admin"),
+            new("User")
 
         };
 
         public static IEnumerable<Department> Departments => new List<Department>()
         {
-            new Department
-            {
+            new() {
                 Code = "CDS",
                 Name = "Chuyển đổi số",
                 CreatedAt = DateTime.Now,
@@ -43,8 +40,7 @@ namespace TaskManagement.Data.Extensions
                 LastModifiedAt = DateTime.Now,
                 LastModifiedBy = "Seed Data"
             },
-            new Department
-            {
+            new() {
                 Code = "AI",
                 Name = "Trí tuệ nhân tạo",
                 CreatedAt = DateTime.Now,

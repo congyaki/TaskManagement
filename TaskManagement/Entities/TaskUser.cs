@@ -4,17 +4,14 @@ using System.ComponentModel.DataAnnotations;
 namespace TaskManagement.Entities
 {
     [Table("TBL_TASK_USERS")]
-    public class TaskUser
+    public class TaskUser : BaseEntity<int>
     {
-        [Key]
-        [Column("ID")]
-        public int Id { get; set; }
 
         [Column("TASK_ID")]
         public int TaskId { get; set; }  // Foreign Key to TblTask
 
         [Column("USER_ID")]
-        public string UserId { get; set; }  // Foreign Key to User (assuming there is a User table)
+        public int UserId { get; set; }  // Foreign Key to User (assuming there is a User table)
 
         [Column("CREATED_BY")]
         public string CreatedBy { get; set; }

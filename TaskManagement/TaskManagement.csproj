@@ -39,10 +39,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Migrations\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\css\sb-admin-2.css" />
     <None Include="wwwroot\css\sb-admin-2.min.css" />
     <None Include="wwwroot\img\undraw_posting_photo.svg" />

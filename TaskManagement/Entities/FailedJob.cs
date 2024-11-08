@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations;
 namespace TaskManagement.Entities
 {
     [Table("TBL_FAILED_JOBS")]
-    public class FailedJob
+    public class FailedJob : BaseEntity<int>
     {
-        [Key]
-        [Column("ID")]
-        public int Id { get; set; }
 
         [Required]
         [Column("UUID")]
