@@ -40,7 +40,7 @@
                 <label for="description" class="form-label">Mô tả</label>
                 <textarea id="description" class="control-customized" rows="3"></textarea>
             </div>
-
+@* 
             <div class="mb-4">
                 <label for="status" class="form-label">Trạng thái <span class="text-danger">*</span></label>
                 <select class="select-customized" id="status" required>
@@ -48,22 +48,21 @@
                     <option>Đang thực hiện</option>
                     <option>Hoàn thành</option>
                 </select>
-            </div>
+            </div> *@
 
             <div class="d-flex justify-content-between">
                 <button type="submit" class="btn-customized px-4">
                     Tạo Nhãn Dán
                 </button>
-                <button type="button" class="btn btn-outline-secondary px-4">
-                    Quay lại
-                </button>
+                <a asp-action="Index">
+                    <button type="button" class="btn btn-outline-secondary px-4">
+                        Quay lại
+                    </button>
+                </a>
+                
             </div>
         </form>
     </div>
 </div>
 
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
