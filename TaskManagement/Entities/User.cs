@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TaskManagement.Entities
 {
-    public class User : IdentityUser
+    public class User : IdentityUser<int>
     {
         [PersonalData]
         public int DepartmentId { get; set; }
         [PersonalData]
-        public Department Department { get; set; }
+        public TblDmDepartment Department { get; set; }
     }
 }

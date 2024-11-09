@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TaskManagement.Data;
 using TaskManagement.Entities;
-using Task = TaskManagement.Entities.Task;
+using TblTask = TaskManagement.Entities.TblTask;
 
 namespace TaskManagement.Controllers
 {
@@ -93,7 +93,7 @@ namespace TaskManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,StartDate,EndDate,Priority,EstimatedTime,Description,Status,CreatedBy,CreatedAt,LastModifiedBy,LastModifiedAt,DepartmentId,ParentId")] Task task)
+        public async Task<IActionResult> Create([Bind("Id,Title,StartDate,EndDate,Priority,EstimatedTime,Description,Status,CreatedBy,CreatedAt,LastModifiedBy,LastModifiedAt,DepartmentId,ParentId")] TblTask task)
         {
             if (ModelState.IsValid)
             {
@@ -125,7 +125,7 @@ namespace TaskManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,StartDate,EndDate,Priority,EstimatedTime,Description,Status,CreatedBy,CreatedAt,LastModifiedBy,LastModifiedAt,DepartmentId,ParentId")] Task task)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,StartDate,EndDate,Priority,EstimatedTime,Description,Status,CreatedBy,CreatedAt,LastModifiedBy,LastModifiedAt,DepartmentId,ParentId")] TblTask task)
         {
             if (id != task.Id)
             {

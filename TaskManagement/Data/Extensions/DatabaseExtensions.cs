@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq.Expressions;
+using System.Transactions;
 using TaskManagement.Entities;
 using Task = System.Threading.Tasks.Task;
 
@@ -28,7 +30,7 @@ namespace TaskManagement.Data.Extensions
 
         private static async Task SeedRoleAsync(ApplicationDbContext context, IServiceProvider serviceProvider)
         {
-            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<Role>>();
 
             foreach (var role in InitialData.Roles)
             {
@@ -81,6 +83,106 @@ namespace TaskManagement.Data.Extensions
                 await context.Departments.AddRangeAsync(InitialData.Departments);
                 await context.SaveChangesAsync();
             }
+        }
+
+        private static async Task SeedLabelAsync(ApplicationDbContext context)
+        {
+            if (!await context.Labels.AnyAsync())
+            {
+                await context.Labels.AddRangeAsync(InitialData.Labels);
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public static async Task<List<T>> ToListAsyncNoLock<T>(this IQueryable<T> query)
+        {
+            using (CreateNoLockTransaction())
+            {
+                return await query.ToListAsync();
+            }
+        }
+
+        public static async Task<T> FirstAsyncNoLock<T>(this IQueryable<T> query)
+        {
+            using (CreateNoLockTransaction())
+            {
+                return await query.FirstAsync();
+            }
+        }
+
+        public static async Task<T> FirstOrDefaultAsyncNoLock<T>(this IQueryable<T> query)
+        {
+            using (CreateNoLockTransaction())
+            {
+                return await query.FirstOrDefaultAsync();
+            }
+        }
+
+        public static async Task<T> LastOrDefaultAsyncNoLock<T>(this IQueryable<T> query)
+        {
+            using (CreateNoLockTransaction())
+            {
+                return await query.LastOrDefaultAsync();
+            }
+        }
+
+        public static async Task<T> SingleOrDefaultAsyncNoLock<T>(this IQueryable<T> query)
+        {
+            using (CreateNoLockTransaction())
+            {
+                return await query.SingleOrDefaultAsync();
+            }
+        }
+
+        public static async Task<bool> AnyAsyncNoLock<T>(this IQueryable<T> query)
+        {
+            using (CreateNoLockTransaction())
+            {
+                return await query.AnyAsync();
+            }
+        }
+
+        public static async Task<int> CountAsyncNoLock<T>(this IQueryable<T> query)
+        {
+            using (CreateNoLockTransaction())
+            {
+                return await query.CountAsync();
+            }
+        }
+
+        public static async Task<int> CountAsyncNoLock<T>(this IQueryable<T> query, Expression<Func<T, bool>> predicate)
+        {
+            using (CreateNoLockTransaction())
+            {
+                return await query.CountAsync(predicate);
+            }
+        }
+
+        public static async Task<T> FirstOrDefaultAsyncNoLock<T>(this IQueryable<T> query, Expression<Func<T, bool>> predicate)
+        {
+            using (CreateNoLockTransaction())
+            {
+                return await query.FirstOrDefaultAsync(predicate);
+            }
+
+        }
+
+        public static async Task<T[]> ToArrayAsyncNoLock<T>(this IQueryable<T> query)
+        {
+            using (CreateNoLockTransaction())
+            {
+                return await query.ToArrayAsync();
+            }
+        }
+
+        public static TransactionScope CreateNoLockTransaction()
+        {
+            return new TransactionScope(
+                                     TransactionScopeOption.Required,
+                                     new TransactionOptions
+                                     {
+                                         IsolationLevel = IsolationLevel.ReadUncommitted,
+                                     }, TransactionScopeAsyncFlowOption.Enabled);
         }
     }
 }

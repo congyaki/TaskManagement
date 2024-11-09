@@ -4,12 +4,8 @@ using System.ComponentModel.DataAnnotations;
 namespace TaskManagement.Entities
 {
     [Table("TBL_COMMENTS")]
-    public class Comment
+    public class TblComment : BaseEntity<int>
     {
-        [Key]
-        [Column("ID")]
-        public int Id { get; set; }
-
         [Column("TASK_ID")]
         public int TaskId { get; set; }  // Foreign Key to TblTask
 
