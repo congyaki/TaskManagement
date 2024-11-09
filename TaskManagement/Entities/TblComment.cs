@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace TaskManagement.Entities
 {
     [Table("TBL_COMMENTS")]
-    public class Comment : BaseEntity<int>
+    public class TblComment : BaseEntity<int>
     {
         [Column("TASK_ID")]
         public int TaskId { get; set; }  // Foreign Key to TblTask

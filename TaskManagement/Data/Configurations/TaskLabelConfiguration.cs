@@ -8,11 +8,11 @@ namespace TaskManagement.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<TaskLabel> builder)
         {
-            builder.HasOne<Entities.Task>()
+            builder.HasOne<Entities.TblTask>()
             .WithMany()
             .HasForeignKey(t => t.TaskId);
 
-            builder.HasOne<Label>()
+            builder.HasOne<TblDmLabel>()
             .WithMany()
             .HasForeignKey(t => t.LabelId);
         }

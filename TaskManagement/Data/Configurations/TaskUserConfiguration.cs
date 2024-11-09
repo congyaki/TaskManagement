@@ -13,7 +13,7 @@ namespace TaskManagement.Data.Configurations
                 .HasForeignKey(t => t.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne<Entities.Task>()
+            builder.HasOne<Entities.TblTask>()
             .WithMany()
             .HasForeignKey(t => t.TaskId);
         }

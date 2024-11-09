@@ -9,6 +9,6 @@ namespace TaskManagement.Entities
         [PersonalData]
         public int DepartmentId { get; set; }
         [PersonalData]
-        public Department Department { get; set; }
+        public TblDmDepartment Department { get; set; }
     }
 }

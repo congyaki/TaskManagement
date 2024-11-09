@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace TaskManagement.Entities
 {
     [Table("TBL_FAILED_JOBS")]
-    public class FailedJob : BaseEntity<int>
+    public class TblFailedJob : BaseEntity<int>
     {
 
         [Required]

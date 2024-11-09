@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace TaskManagement.Entities
 {
     [Table("TBL_TASKS")]
-    public class Task : BaseEntity<int>
+    public class TblTask : BaseEntity<int>
     {
 
         [Column("TITLE")]

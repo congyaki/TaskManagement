@@ -4,11 +4,11 @@ using TaskManagement.Entities;
 
 namespace TaskManagement.Data.Configurations
 {
-    public class CommentConfiguration : IEntityTypeConfiguration<Comment>
+    public class CommentConfiguration : IEntityTypeConfiguration<TblComment>
     {
-        public void Configure(EntityTypeBuilder<Comment> builder)
+        public void Configure(EntityTypeBuilder<TblComment> builder)
         {
-            builder.HasOne<Entities.Task>()
+            builder.HasOne<Entities.TblTask>()
             .WithMany()
             .HasForeignKey(c => c.TaskId);
         }

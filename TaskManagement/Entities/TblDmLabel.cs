@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace TaskManagement.Entities
 {
     [Table("TBL_DM_LABELS")]
-    public class Label : BaseEntity<int>
+    public class TblDmLabel : BaseEntity<int>
     {
 
         [Column("CODE")]

@@ -4,15 +4,15 @@ using TaskManagement.Entities;
 
 namespace TaskManagement.Data.Configurations
 {
-    public class TaskConfiguration : IEntityTypeConfiguration<Entities.Task>
+    public class TaskConfiguration : IEntityTypeConfiguration<Entities.TblTask>
     {
-        public void Configure(EntityTypeBuilder<Entities.Task> builder)
+        public void Configure(EntityTypeBuilder<Entities.TblTask> builder)
         {
-            builder.HasOne<Department>()
+            builder.HasOne<TblDmDepartment>()
             .WithMany()
             .HasForeignKey(t => t.DepartmentId);
 
-            builder.HasOne<Entities.Task>()
+            builder.HasOne<Entities.TblTask>()
             .WithMany()
             .HasForeignKey(t => t.ParentId);
         }

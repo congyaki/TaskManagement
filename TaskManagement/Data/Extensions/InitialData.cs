@@ -30,7 +30,7 @@ namespace TaskManagement.Data.Extensions
 
         };
 
-        public static IEnumerable<Department> Departments => new List<Department>()
+        public static IEnumerable<TblDmDepartment> Departments => new List<TblDmDepartment>()
         {
             new() {
                 Code = "CDS",
@@ -43,6 +43,27 @@ namespace TaskManagement.Data.Extensions
             new() {
                 Code = "AI",
                 Name = "Trí tuệ nhân tạo",
+                CreatedAt = DateTime.Now,
+                CreatedBy = "Seed Data",
+                LastModifiedAt = DateTime.Now,
+                LastModifiedBy = "Seed Data"
+            },
+
+        };
+
+        public static IEnumerable<TblDmLabel> Labels => new List<TblDmLabel>()
+        {
+            new() {
+                Code = "CTDT",
+                Name = "Chương trình đào tạo",
+                CreatedAt = DateTime.Now,
+                CreatedBy = "Seed Data",
+                LastModifiedAt = DateTime.Now,
+                LastModifiedBy = "Seed Data"
+            },
+            new() {
+                Code = "HOC_TAP",
+                Name = "Học tập",
                 CreatedAt = DateTime.Now,
                 CreatedBy = "Seed Data",
                 LastModifiedAt = DateTime.Now,

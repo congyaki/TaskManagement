@@ -56,7 +56,7 @@ namespace TaskManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Code,Name,CreatedBy,CreatedAt,LastModifiedBy,LastModifiedAt")] Department department)
+        public async Task<IActionResult> Create([Bind("Id,Code,Name,CreatedBy,CreatedAt,LastModifiedBy,LastModifiedAt")] TblDmDepartment department)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace TaskManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Code,Name,CreatedBy,CreatedAt,LastModifiedBy,LastModifiedAt")] Department department)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Code,Name,CreatedBy,CreatedAt,LastModifiedBy,LastModifiedAt")] TblDmDepartment department)
         {
             if (id != department.Id)
             {

@@ -56,7 +56,7 @@ namespace TaskManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Code,Name,Color,CreatedBy,CreatedAt,LastModifiedBy,LastModifiedAt")] Label label)
+        public async Task<IActionResult> Create([Bind("Id,Code,Name,Color,CreatedBy,CreatedAt,LastModifiedBy,LastModifiedAt")] TblDmLabel label)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace TaskManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Code,Name,Color,CreatedBy,CreatedAt,LastModifiedBy,LastModifiedAt")] Label label)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Code,Name,Color,CreatedBy,CreatedAt,LastModifiedBy,LastModifiedAt")] TblDmLabel label)
         {
             if (id != label.Id)
             {

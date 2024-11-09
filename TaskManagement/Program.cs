@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using TaskManagement.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
+using TaskManagement.Data.Repositories;
+using TaskManagement.Interfaces.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +43,10 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.SlidingExpiration = true;
     });
 
+builder.Services.AddTransient(typeof(IBaseRepository<,>), typeof(BaseRepository<,>));
+
+var assembly = typeof(Program).Assembly;
+builder.Services.AddAutoMapper(assembly);
 //Tương đương code trên
 //builder.Services.ConfigureApplicationCookie(o => {
 //    // Overwrite Default settings.

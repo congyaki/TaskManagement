@@ -14,12 +14,13 @@ namespace TaskManagement.Data
         {
 
         }
-        public DbSet<Comment> Comments { get; set; }
-        public DbSet<Department> Departments { get; set; }
-        public DbSet<FailedJob> FailedJobs { get; set; }
-        public DbSet<Job> Jobs { get; set; }
-        public DbSet<Entities.Label> Labels { get; set; }
-        public DbSet<Entities.Task> Tasks { get; set; }
+
+        public DbSet<TblComment> Comments { get; set; }
+        public DbSet<TblDmDepartment> Departments { get; set; }
+        public DbSet<TblFailedJob> FailedJobs { get; set; }
+        public DbSet<TblJob> Jobs { get; set; }
+        public DbSet<Entities.TblDmLabel> Labels { get; set; }
+        public DbSet<Entities.TblTask> Tasks { get; set; }
         public DbSet<TaskLabel> TaskLabels { get; set; }
         public DbSet<TaskUser> TaskUsers { get; set; }
         //public DbSet<User> Users { get; set; }
