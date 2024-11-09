@@ -10,27 +10,34 @@ namespace TaskManagement.Entities
         [Column("ID")]
         public int Id { get; set; }
 
+        [Display(Name ="Tiêu Đề")]
         [Column("TITLE")]
         public string Title { get; set; }
 
+        [Display(Name = "Thời gian bắt đầu")]
         [Column("START_DATE")]
         public DateTime? StartDate { get; set; }
 
+        [Display(Name ="Thời gian kết thúc")]
         [Column("END_DATE")]
         public DateTime? EndDate { get; set; }
 
+        [Display(Name = "Mức độ ưu tiên")]
         [Column("PRIORITY")]
         public int? Priority { get; set; }
 
         [Column("ESTIMATED_TIME")]
         public double? EstimatedTime { get; set; }
 
+        [Display(Name = "Mô tả")]
         [Column("DESCRIPTION")]
         public string Description { get; set; }
 
+        [Display(Name = "Trạng thái")]
         [Column("STATUS")]
         public string Status { get; set; }
 
+        [Display(Name = "Tạo bởi")]
         [Column("CREATED_BY")]
         public string CreatedBy { get; set; }
 
