@@ -39,5 +39,6 @@ namespace TaskManagement.Entities
         public List<TaskLabel> TaskLabels { get; set; }
         public List<TaskUser> TaskUsers { get; set; }
         public List<TblComment> Comments { get; set; }
+        public List<TaskFile> TaskFiles { get; set; }
     }
 }

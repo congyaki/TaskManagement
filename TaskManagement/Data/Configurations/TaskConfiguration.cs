@@ -31,6 +31,12 @@ namespace TaskManagement.Data.Configurations
                 .WithOne(u => u.Task)
                 .HasForeignKey(u => u.TaskId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(d => d.TaskFiles)
+                .WithOne(u => u.Task)
+                .HasForeignKey(u => u.TaskId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             builder.Property(t => t.Status)
                 .HasConversion<string>();
         }
