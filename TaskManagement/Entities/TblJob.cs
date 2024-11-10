@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace TaskManagement.Entities
 {
     [Table("TBL_JOBS")]
-    public class TblJob : BaseEntity<int>
+    public class TblJob : DomainEntity<int>
     {
 
         [Column("QUEUE")]
@@ -21,8 +21,5 @@ namespace TaskManagement.Entities
 
         [Column("AVAILABLE_AT")]
         public DateTime? AvailableAt { get; set; }
-
-        [Column("CREATED_AT")]
-        public DateTime CreatedAt { get; set; }
     }
 }

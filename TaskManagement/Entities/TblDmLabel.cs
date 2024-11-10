@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace TaskManagement.Entities
 {
     [Table("TBL_DM_LABELS")]
-    public class TblDmLabel : BaseEntity<int>
+    public class TblDmLabel : DomainEntity<int>
     {
 
         [Column("CODE")]
@@ -12,20 +12,11 @@ namespace TaskManagement.Entities
 
         [Column("NAME")]
         public string Name { get; set; }
+        [Column("DESCRIPTION")]
+        public string Description { get; set; }
 
         [Column("COLOR")]
         public string Color { get; set; }
-
-        [Column("CREATED_BY")]
-        public string CreatedBy { get; set; }
-
-        [Column("CREATED_AT")]
-        public DateTime CreatedAt { get; set; }
-
-        [Column("LAST_MODIFIED_BY")]
-        public string LastModifiedBy { get; set; }
-
-        [Column("LAST_MODIFIED_AT")]
-        public DateTime? LastModifiedAt { get; set; }
+        public List<TaskLabel> TaskLabels { get; set; }
     }
 }

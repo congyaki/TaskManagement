@@ -1,25 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using TaskManagement.Data;
 using TaskManagement.Data.Extensions;
 using Microsoft.AspNetCore.Identity;
 using TaskManagement.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Builder;
-using TaskManagement.Data.Repositories;
-using TaskManagement.Interfaces.Repositories;
+using TaskManagement.Services;
+using TaskManagement.Interfaces.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("Database");
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(connectionString);
 });
 
 builder.Services.AddIdentity<User, Role>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
 //builder.Services.AddIdentity<User, IdentityRole>(options =>
@@ -43,7 +41,10 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.SlidingExpiration = true;
     });
 
-builder.Services.AddTransient(typeof(IBaseRepository<,>), typeof(BaseRepository<,>));
+// Services
+builder.Services.AddTransient<IDepartmentService, DepartmentService>();
+builder.Services.AddTransient<ILabelService, LabelService>();
+builder.Services.AddTransient<ITaskService, TaskService>();
 
 var assembly = typeof(Program).Assembly;
 builder.Services.AddAutoMapper(assembly);

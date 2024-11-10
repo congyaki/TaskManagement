@@ -12,9 +12,9 @@ namespace TaskManagement.Controllers
 {
     public class LabelsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly AppDbContext _context;
 
-        public LabelsController(ApplicationDbContext context)
+        public LabelsController(AppDbContext context)
         {
             _context = context;
         }

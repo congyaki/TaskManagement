@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using TaskManagement.enums;
+using TaskStatus = TaskManagement.enums.TaskStatus;
 
 namespace TaskManagement.Entities
 {
     [Table("TBL_TASKS")]
-    public class TblTask : BaseEntity<int>
+    public class TblTask : DomainEntity<int>
     {
 
         [Column("TITLE")]
@@ -26,24 +28,16 @@ namespace TaskManagement.Entities
         public string Description { get; set; }
 
         [Column("STATUS")]
-        public string Status { get; set; }
+        public TaskStatus Status { get; set; }
 
-        [Column("CREATED_BY")]
-        public string CreatedBy { get; set; }
-
-        [Column("CREATED_AT")]
-        public DateTime CreatedAt { get; set; }
-
-        [Column("LAST_MODIFIED_BY")]
-        public string LastModifiedBy { get; set; }
-
-        [Column("LAST_MODIFIED_AT")]
-        public DateTime? LastModifiedAt { get; set; }
-
-        [Column("DEPARTMENT_ID")]
-        public int DepartmentId { get; set; }  // Foreign Key
+        //[Column("DEPARTMENT_ID")]
+        //public int DepartmentId { get; set; }
 
         [Column("PARENT_ID")]
-        public int? ParentId { get; set; }  // Foreign Key (Self reference)
+        public int? ParentId { get; set; }
+        //public TblDmDepartment Department { get; set; }
+        public List<TaskLabel> TaskLabels { get; set; }
+        public List<TaskUser> TaskUsers { get; set; }
+        public List<TblComment> Comments { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Net;
 using TaskManagement.Entities;
+using TaskManagement.enums;
+using TaskStatus = TaskManagement.enums.TaskStatus;
 
 namespace TaskManagement.Data.Extensions
 {
@@ -35,18 +37,20 @@ namespace TaskManagement.Data.Extensions
             new() {
                 Code = "CDS",
                 Name = "Chuyển đổi số",
+                Description = "Môn chuyển đổi số",
                 CreatedAt = DateTime.Now,
-                CreatedBy = "Seed Data",
+                CreatedBy = 0,
                 LastModifiedAt = DateTime.Now,
-                LastModifiedBy = "Seed Data"
+                LastModifiedBy = 0
             },
             new() {
                 Code = "AI",
                 Name = "Trí tuệ nhân tạo",
+                Description = "Môn trí tuệ nhân tạo",
                 CreatedAt = DateTime.Now,
-                CreatedBy = "Seed Data",
+                CreatedBy = 0,
                 LastModifiedAt = DateTime.Now,
-                LastModifiedBy = "Seed Data"
+                LastModifiedBy = 0
             },
 
         };
@@ -56,20 +60,42 @@ namespace TaskManagement.Data.Extensions
             new() {
                 Code = "CTDT",
                 Name = "Chương trình đào tạo",
+                Color = "#0000",
+                Description = "Chương trình đào tạo",
                 CreatedAt = DateTime.Now,
-                CreatedBy = "Seed Data",
+                CreatedBy = 0,
                 LastModifiedAt = DateTime.Now,
-                LastModifiedBy = "Seed Data"
+                LastModifiedBy = 0
             },
             new() {
                 Code = "HOC_TAP",
                 Name = "Học tập",
+                Color = "#ffff",
+                Description = "Học tập",
                 CreatedAt = DateTime.Now,
-                CreatedBy = "Seed Data",
+                CreatedBy = 0,
                 LastModifiedAt = DateTime.Now,
-                LastModifiedBy = "Seed Data"
+                LastModifiedBy = 0
             },
 
+        };
+
+        public static IEnumerable<TblTask> Tasks => new List<TblTask>()
+        {
+            new() {
+                Title = "Complete project documentation",
+                Description = "Prepare and complete all project documentation.",
+                CreatedAt = DateTime.Now,
+                CreatedBy = 0,
+                Status = TaskStatus.Pending,
+            },
+            new() {
+                Title = "Develop authentication module",
+                Description = "Implement user authentication and authorization.",
+                CreatedAt = DateTime.Now,
+                CreatedBy = 0,
+                Status = TaskStatus.Pending,
+            }
         };
 
     }

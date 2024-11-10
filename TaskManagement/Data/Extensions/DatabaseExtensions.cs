@@ -14,21 +14,24 @@ namespace TaskManagement.Data.Extensions
         {
             using var scope = app.Services.CreateScope();
 
-            var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
             
             context.Database.MigrateAsync().GetAwaiter().GetResult();
 
             await SeedAsync(context, serviceProvider);
         }
 
-        private static async Task SeedAsync(ApplicationDbContext context, IServiceProvider serviceProvider)
+        private static async Task SeedAsync(AppDbContext context, IServiceProvider serviceProvider)
         {
             await SeedDepartmentAsync(context);
             await SeedRoleAsync(context, serviceProvider);
             await SeedUserAsync(context, serviceProvider);
+            await SeedLabelAsync(context);
+            await SeedTaskAsync(context);
+
         }
 
-        private static async Task SeedRoleAsync(ApplicationDbContext context, IServiceProvider serviceProvider)
+        private static async Task SeedRoleAsync(AppDbContext context, IServiceProvider serviceProvider)
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<Role>>();
 
@@ -42,7 +45,7 @@ namespace TaskManagement.Data.Extensions
             
         }
 
-        private static async Task SeedUserAsync(ApplicationDbContext context, IServiceProvider serviceProvider)
+        private static async Task SeedUserAsync(AppDbContext context, IServiceProvider serviceProvider)
         {
             var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
 
@@ -76,7 +79,7 @@ namespace TaskManagement.Data.Extensions
 
         }
 
-        private static async Task SeedDepartmentAsync(ApplicationDbContext context)
+        private static async Task SeedDepartmentAsync(AppDbContext context)
         {
             if (!await context.Departments.AnyAsync())
             {
@@ -85,7 +88,7 @@ namespace TaskManagement.Data.Extensions
             }
         }
 
-        private static async Task SeedLabelAsync(ApplicationDbContext context)
+        private static async Task SeedLabelAsync(AppDbContext context)
         {
             if (!await context.Labels.AnyAsync())
             {
@@ -94,95 +97,104 @@ namespace TaskManagement.Data.Extensions
             }
         }
 
-        public static async Task<List<T>> ToListAsyncNoLock<T>(this IQueryable<T> query)
+        private static async Task SeedTaskAsync(AppDbContext context)
         {
-            using (CreateNoLockTransaction())
+            if (!await context.Tasks.AnyAsync())
             {
-                return await query.ToListAsync();
+                await context.Tasks.AddRangeAsync(InitialData.Tasks);
+                await context.SaveChangesAsync();
             }
         }
 
-        public static async Task<T> FirstAsyncNoLock<T>(this IQueryable<T> query)
-        {
-            using (CreateNoLockTransaction())
-            {
-                return await query.FirstAsync();
-            }
-        }
+        //public static async Task<List<T>> ToListAsyncNoLock<T>(this IQueryable<T> query)
+        //{
+        //    using (CreateNoLockTransaction())
+        //    {
+        //        return await query.ToListAsync();
+        //    }
+        //}
 
-        public static async Task<T> FirstOrDefaultAsyncNoLock<T>(this IQueryable<T> query)
-        {
-            using (CreateNoLockTransaction())
-            {
-                return await query.FirstOrDefaultAsync();
-            }
-        }
+        //public static async Task<T> FirstAsyncNoLock<T>(this IQueryable<T> query)
+        //{
+        //    using (CreateNoLockTransaction())
+        //    {
+        //        return await query.FirstAsync();
+        //    }
+        //}
 
-        public static async Task<T> LastOrDefaultAsyncNoLock<T>(this IQueryable<T> query)
-        {
-            using (CreateNoLockTransaction())
-            {
-                return await query.LastOrDefaultAsync();
-            }
-        }
+        //public static async Task<T> FirstOrDefaultAsyncNoLock<T>(this IQueryable<T> query)
+        //{
+        //    using (CreateNoLockTransaction())
+        //    {
+        //        return await query.FirstOrDefaultAsync();
+        //    }
+        //}
 
-        public static async Task<T> SingleOrDefaultAsyncNoLock<T>(this IQueryable<T> query)
-        {
-            using (CreateNoLockTransaction())
-            {
-                return await query.SingleOrDefaultAsync();
-            }
-        }
+        //public static async Task<T> LastOrDefaultAsyncNoLock<T>(this IQueryable<T> query)
+        //{
+        //    using (CreateNoLockTransaction())
+        //    {
+        //        return await query.LastOrDefaultAsync();
+        //    }
+        //}
 
-        public static async Task<bool> AnyAsyncNoLock<T>(this IQueryable<T> query)
-        {
-            using (CreateNoLockTransaction())
-            {
-                return await query.AnyAsync();
-            }
-        }
+        //public static async Task<T> SingleOrDefaultAsyncNoLock<T>(this IQueryable<T> query)
+        //{
+        //    using (CreateNoLockTransaction())
+        //    {
+        //        return await query.SingleOrDefaultAsync();
+        //    }
+        //}
 
-        public static async Task<int> CountAsyncNoLock<T>(this IQueryable<T> query)
-        {
-            using (CreateNoLockTransaction())
-            {
-                return await query.CountAsync();
-            }
-        }
+        //public static async Task<bool> AnyAsyncNoLock<T>(this IQueryable<T> query)
+        //{
+        //    using (CreateNoLockTransaction())
+        //    {
+        //        return await query.AnyAsync();
+        //    }
+        //}
 
-        public static async Task<int> CountAsyncNoLock<T>(this IQueryable<T> query, Expression<Func<T, bool>> predicate)
-        {
-            using (CreateNoLockTransaction())
-            {
-                return await query.CountAsync(predicate);
-            }
-        }
+        //public static async Task<int> CountAsyncNoLock<T>(this IQueryable<T> query)
+        //{
+        //    using (CreateNoLockTransaction())
+        //    {
+        //        return await query.CountAsync();
+        //    }
+        //}
 
-        public static async Task<T> FirstOrDefaultAsyncNoLock<T>(this IQueryable<T> query, Expression<Func<T, bool>> predicate)
-        {
-            using (CreateNoLockTransaction())
-            {
-                return await query.FirstOrDefaultAsync(predicate);
-            }
+        //public static async Task<int> CountAsyncNoLock<T>(this IQueryable<T> query, Expression<Func<T, bool>> predicate)
+        //{
+        //    using (CreateNoLockTransaction())
+        //    {
+        //        return await query.CountAsync(predicate);
+        //    }
+        //}
 
-        }
+        //public static async Task<T> FirstOrDefaultAsyncNoLock<T>(this IQueryable<T> query, Expression<Func<T, bool>> predicate)
+        //{
+        //    using (CreateNoLockTransaction())
+        //    {
+        //        return await query.FirstOrDefaultAsync(predicate);
+        //    }
 
-        public static async Task<T[]> ToArrayAsyncNoLock<T>(this IQueryable<T> query)
-        {
-            using (CreateNoLockTransaction())
-            {
-                return await query.ToArrayAsync();
-            }
-        }
+        //}
 
-        public static TransactionScope CreateNoLockTransaction()
-        {
-            return new TransactionScope(
-                                     TransactionScopeOption.Required,
-                                     new TransactionOptions
-                                     {
-                                         IsolationLevel = IsolationLevel.ReadUncommitted,
-                                     }, TransactionScopeAsyncFlowOption.Enabled);
-        }
+        //public static async Task<T[]> ToArrayAsyncNoLock<T>(this IQueryable<T> query)
+        //{
+        //    using (CreateNoLockTransaction())
+        //    {
+        //        return await query.ToArrayAsync();
+        //    }
+        //}
+
+        //public static TransactionScope CreateNoLockTransaction()
+        //{
+        //    return new TransactionScope(
+        //                             TransactionScopeOption.Required,
+        //                             new TransactionOptions
+        //                             {
+        //                                 IsolationLevel = IsolationLevel.ReadUncommitted,
+        //                             }, TransactionScopeAsyncFlowOption.Enabled);
+        //}
     }
 }

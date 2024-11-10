@@ -8,14 +8,15 @@ namespace TaskManagement.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<TaskUser> builder)
         {
-            builder.HasOne<User>()
-                .WithMany()
-                .HasForeignKey(t => t.UserId)
-                .OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(u => u.Task)
+                .WithMany(d => d.TaskUsers)
+                .HasForeignKey(u => u.TaskId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne<Entities.TblTask>()
-            .WithMany()
-            .HasForeignKey(t => t.TaskId);
+            builder.HasOne(u => u.User)
+                .WithMany(d => d.TaskUsers)
+                .HasForeignKey(u => u.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

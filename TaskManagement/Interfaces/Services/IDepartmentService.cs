@@ -2,8 +2,8 @@
 {
     public interface IDepartmentService
     {
-        Task CreateDepartment();
-        Task UpdateDepartment();
-        Task DeleteDepartment();
+        Task Create();
+        Task Update();
+        Task Delete();
     }
 }

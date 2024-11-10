@@ -4,17 +4,17 @@ using TaskManagement.Entities;
 
 namespace TaskManagement.Data.Configurations
 {
-    public class CommentConfiguration : IEntityTypeConfiguration<TblComment>
+    public class UserConfiguration : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<TblComment> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasOne(u => u.Task)
-                .WithMany(d => d.Comments)
-                .HasForeignKey(u => u.TaskId)
+            builder.HasOne(u => u.Department)
+                .WithMany(d => d.Users)
+                .HasForeignKey(u => u.DepartmentId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(u => u.User)
-                .WithMany(d => d.Comments)
+            builder.HasMany(d => d.Comments)
+                .WithOne(u => u.User)
                 .HasForeignKey(u => u.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
         }

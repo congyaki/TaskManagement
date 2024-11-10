@@ -1,122 +1,141 @@
 ﻿using AutoMapper;
 using BoilerPlate.Utils;
-using NuGet.Protocol.Core.Types;
-using TaskManagement.Entities;
-using TaskManagement.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
+using TaskManagement.Data;
 using TaskManagement.Interfaces.Services;
 using TaskManagement.Models.Requests.List;
 using TaskManagement.Models.Requests.Task.Command;
 using TaskManagement.Models.Requests.Task.Query;
-using X.PagedList;
+using TaskManagement.Utils.Dtos;
 
 namespace TaskManagement.Services
 {
     public class TaskService : ITaskService
     {
-        private readonly IBaseRepository<TblTask, int> _taskRepository;
-        private readonly IBaseRepository<TaskUser, int> _taskUserRepository;
-        private readonly IBaseRepository<TaskLabel, int> _taskLabelRepository;
         private readonly IMapper _mapper;
+        private readonly AppDbContext _context;
 
-        public TaskService(IBaseRepository<TblTask, int> repository, IMapper mapper, IBaseRepository<TaskUser, int> taskUserRepository, IBaseRepository<TaskLabel, int> taskLabelRepository)
+        public TaskService(IMapper mapper, AppDbContext context)
         {
-            _taskRepository = repository;
             _mapper = mapper;
-            _taskUserRepository = taskUserRepository;
-            _taskLabelRepository = taskLabelRepository;
+            _context = context;
         }
 
-        public async Task<bool> AssignTask(TaskCommandDto taskCommand)
+        public Task<bool> Assign(TaskCommandDto taskCommand)
         {
-            if (taskCommand is null)
-                throw new Exception("Dữ liệu không hợp lệ !");
+            //var task = _mapper.Map<TblTask>(taskCommand);
+            //task.CreatedAt = DateTime.UtcNow;
+            ////task.CreatedBy = ;
+            //await _taskRepository.AddAsync(task);
 
-            var task = _mapper.Map<TblTask>(taskCommand);
-            task.CreatedAt = DateTime.UtcNow;
-            //task.CreatedBy = ;
-            await _taskRepository.AddAsync(task);
+            //var res = await _taskRepository.CommitAsync() > 0;
+            //if (res)
+            //{
+            //    throw new CustomException("Có lỗi xảy ra khi giao việc !");
+            //}
 
-            var res = await _taskRepository.CommitAsync() > 0;
-            if (res)
-            {
-                throw new CustomException("Có lỗi xảy ra khi giao việc !");
-            }
+            //foreach (var userId in taskCommand.UserIds)
+            //{
+            //    var taskUser = new TaskUser()
+            //    {
+            //        TaskId = task.Id,
+            //        UserId = userId,
+            //        CreatedAt = DateTime.UtcNow,
+            //        //CreatedBy = ;
+            //    };
+            //    await _taskUserRepository.AddAsync(taskUser);
+            //}
 
-            foreach (var userId in taskCommand.UserIds)
-            {
-                var taskUser = new TaskUser()
-                {
-                    TaskId = task.Id,
-                    UserId = userId,
-                    CreatedAt = DateTime.UtcNow,
-                    //CreatedBy = ;
-                };
-                await _taskUserRepository.AddAsync(taskUser);
-            }
+            //res = await _taskUserRepository.CommitAsync() > 0;
+            //if (res)
+            //{
+            //    throw new CustomException("Có lỗi xảy ra khi giao việc !");
+            //}
 
-            res = await _taskUserRepository.CommitAsync() > 0;
-            if (res)
-            {
-                throw new CustomException("Có lỗi xảy ra khi giao việc !");
-            }
+            //foreach (var labelId in taskCommand.LabelIds)
+            //{
+            //    var taskLabel = new TaskLabel()
+            //    {
+            //        TaskId = task.Id,
+            //        LabelId = labelId,
+            //        CreatedAt = DateTime.UtcNow,
+            //        //CreatedBy = ;
+            //    };
+            //    await _taskLabelRepository.AddAsync(taskLabel);
 
-            foreach (var labelId in taskCommand.LabelIds)
-            {
-                var taskLabel = new TaskLabel()
-                {
-                    TaskId = task.Id,
-                    LabelId = labelId,
-                    CreatedAt = DateTime.UtcNow,
-                    //CreatedBy = ;
-                };
-                await _taskLabelRepository.AddAsync(taskLabel);
+            //}
 
-            }
+            //res = await _taskLabelRepository.CommitAsync() > 0;
+            //if (res)
+            //{
+            //    throw new CustomException("Có lỗi xảy ra khi giao việc !");
+            //}
 
-            res = await _taskLabelRepository.CommitAsync() > 0;
-            if (res)
-            {
-                throw new CustomException("Có lỗi xảy ra khi giao việc !");
-            }
+            //return res;
 
-            return res;
+            throw new NotImplementedException();
+
+
         }
 
-        public async Task<bool> DeleteTask(IEnumerable<int> ids)
+        public Task<bool> Delete(IEnumerable<int> ids)
         {
-            if (!ids.Any())
-                throw new CustomException("Dữ liệu không hợp lệ !");
+            //if (!ids.Any())
+            //    throw new CustomException("Dữ liệu không hợp lệ !");
 
-            var tasks = (await _taskRepository.GetWhereAsync(e => ids.Contains(e.Id))).ToList();
+            //var tasks = (await _taskRepository.GetWhereAsync(e => ids.Contains(e.Id))).ToList();
 
-            if (tasks.Any())
-                throw new CustomException("Không tìm thấy dữ liệu để xóa !");
-            foreach (var task in tasks)
-            {
-                await _taskRepository.RemoveAsync(task);
-            }
+            //if (tasks.Any())
+            //    throw new CustomException("Không tìm thấy dữ liệu để xóa !");
 
-            throw new Exception();
+            //await _taskRepository.RemoveRangeAsync(tasks);
+
+            //var res = await _taskLabelRepository.CommitAsync() > 0;
+            //if (res)
+            //{
+            //    throw new CustomException("Có lỗi xảy ra khi giao việc !");
+            //}
+            //var taskUsers = (await _taskUserRepository.GetWhereAsync(e => ids.Contains(e.TaskId))).ToList();
+            //await _taskUserRepository.RemoveRangeAsync(taskUsers);
+            //res = await _taskLabelRepository.CommitAsync() > 0;
+            //if (res)
+            //{
+            //    throw new CustomException("Có lỗi xảy ra khi giao việc !");
+            //}
+            //var taskLabels = (await _taskLabelRepository.GetWhereAsync(e => ids.Contains(e.TaskId))).ToList();
+            //await _taskLabelRepository.RemoveRangeAsync(taskLabels);
+            //res = await _taskLabelRepository.CommitAsync() > 0;
+            //if (res)
+            //{
+            //    throw new CustomException("Có lỗi xảy ra khi giao việc !");
+            //}
+
+            //return res;
+            throw new NotImplementedException();
+
+
         }
 
-        public Task<TaskQueryDto> GetDetail(int id)
+
+        public Task<PagedResult<TaskQueryDto>> GetAllPaging(int? labelId, int? userId, string keyword, ListRequestModel request)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IPagedList<TaskQueryDto>> GetListTask(ListRequestModel request)
+        public Task<TaskQueryDto> GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateStatusOfTask(int id, int status)
+        public Task<bool> Update(int id, TaskCommandDto taskCommand)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateTask(int id, TaskCommandDto taskCommand)
+        public Task<bool> UpdateStatus(int id, int status)
         {
             throw new NotImplementedException();
         }
+
     }
 }

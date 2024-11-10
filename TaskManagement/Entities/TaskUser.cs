@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace TaskManagement.Entities
 {
     [Table("TBL_TASK_USERS")]
-    public class TaskUser : BaseEntity<int>
+    public class TaskUser : DomainEntity<int>
     {
 
         [Column("TASK_ID")]
@@ -13,16 +13,7 @@ namespace TaskManagement.Entities
         [Column("USER_ID")]
         public int UserId { get; set; }  // Foreign Key to User (assuming there is a User table)
 
-        [Column("CREATED_BY")]
-        public string CreatedBy { get; set; }
-
-        [Column("CREATED_AT")]
-        public DateTime CreatedAt { get; set; }
-
-        [Column("LAST_MODIFIED_BY")]
-        public string LastModifiedBy { get; set; }
-
-        [Column("LAST_MODIFIED_AT")]
-        public DateTime? LastModifiedAt { get; set; }
+        public TblTask Task { get; set; }
+        public User User { get; set; }
     }
 }

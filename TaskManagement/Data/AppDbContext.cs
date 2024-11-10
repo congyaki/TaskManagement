@@ -7,9 +7,9 @@ using TaskManagement.Entities;
 
 namespace TaskManagement.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<User, Role, int>
+    public class AppDbContext : IdentityDbContext<User, Role, int>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
 

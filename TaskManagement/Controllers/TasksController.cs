@@ -13,9 +13,9 @@ namespace TaskManagement.Controllers
 {
     public class TasksController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly AppDbContext _context;
 
-        public TasksController(ApplicationDbContext context)
+        public TasksController(AppDbContext context)
         {
             _context = context;
         }

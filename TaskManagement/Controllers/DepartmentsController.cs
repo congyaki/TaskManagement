@@ -12,9 +12,9 @@ namespace TaskManagement.Controllers
 {
     public class DepartmentsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly AppDbContext _context;
 
-        public DepartmentsController(ApplicationDbContext context)
+        public DepartmentsController(AppDbContext context)
         {
             _context = context;
         }
