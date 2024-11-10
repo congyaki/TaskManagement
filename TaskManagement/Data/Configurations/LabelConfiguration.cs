@@ -11,7 +11,7 @@ namespace TaskManagement.Data.Configurations
             builder.HasMany(d => d.TaskLabels)
                 .WithOne(u => u.Label)
                 .HasForeignKey(u => u.LabelId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

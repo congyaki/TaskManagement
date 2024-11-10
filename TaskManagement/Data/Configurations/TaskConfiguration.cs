@@ -20,22 +20,22 @@ namespace TaskManagement.Data.Configurations
             builder.HasMany(d => d.TaskLabels)
                 .WithOne(u => u.Task)
                 .HasForeignKey(u => u.TaskId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany(d => d.TaskUsers)
                 .WithOne(u => u.Task)
                 .HasForeignKey(u => u.TaskId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany(d => d.Comments)
                 .WithOne(u => u.Task)
                 .HasForeignKey(u => u.TaskId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany(d => d.TaskFiles)
                 .WithOne(u => u.Task)
                 .HasForeignKey(u => u.TaskId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(t => t.Status)
                 .HasConversion<string>();
