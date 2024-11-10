@@ -8,9 +8,11 @@ namespace TaskManagement.Entities
     {
 
         [Column("CODE")]
+        [Display(Name ="Mã bộ môn")]
         public string Code { get; set; }
 
         [Column("NAME")]
+        [Display(Name = "Tên bộ môn")]
         public string Name { get; set; }
         [Column("DESCRIPTION")]
         public string Description { get; set; }

@@ -9,26 +9,32 @@ namespace TaskManagement.Entities
     public class TblTask : DomainEntity<int>
     {
 
+        [Display(Name ="Tiêu Đề")]
         [Column("TITLE")]
         public string Title { get; set; }
         [Column("CODE")]
         public string Code { get; set; }
 
+        [Display(Name = "Thời gian bắt đầu")]
         [Column("START_DATE")]
         public DateTime? StartDate { get; set; }
 
+        [Display(Name ="Thời gian kết thúc")]
         [Column("END_DATE")]
         public DateTime? EndDate { get; set; }
 
+        [Display(Name = "Mức độ ưu tiên")]
         [Column("PRIORITY")]
         public int? Priority { get; set; }
 
         [Column("ESTIMATED_TIME")]
         public double? EstimatedTime { get; set; }
 
+        [Display(Name = "Mô tả")]
         [Column("DESCRIPTION")]
         public string Description { get; set; }
 
+        [Display(Name = "Trạng thái")]
         [Column("STATUS")]
         public TaskStatus Status { get; set; }
 
