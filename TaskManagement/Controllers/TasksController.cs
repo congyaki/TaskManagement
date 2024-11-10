@@ -25,9 +25,9 @@ namespace TaskManagement.Controllers
         {
             if (_context.Tasks == null || !_context.Tasks.Any())
             {
-                var dummyTasks = new List<Task>
+                var dummyTasks = new List<TblTask>
         {
-            new Task
+            new TblTask
             {
                 Title = "Task 1",
                 StartDate = DateTime.Now.AddDays(-10),
@@ -41,7 +41,7 @@ namespace TaskManagement.Controllers
                 LastModifiedBy = "User2",
                 LastModifiedAt = DateTime.Now.AddDays(-1)
             },
-            new Task
+            new TblTask
             {
 
                 Title = "Task 2",

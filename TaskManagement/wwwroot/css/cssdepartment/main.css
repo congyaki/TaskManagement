@@ -1,0 +1,31 @@
+﻿.tabledpm {
+    background-color: #ffffff;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* CSS cho button */
+.btn-custom {
+    display: inline-block;
+    padding: 5px 15px;
+    background-color: #393E92;
+    color: white;
+    text-align: center;
+    text-decoration: none !important; /* Bỏ dấu gạch chân */
+    border: 2px solid transparent; /* Đặt viền ban đầu là trong suốt */
+    border-radius: 15px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+    .btn-custom:hover {
+        background-color: white; /* Màu nền chuyển sang trắng khi hover */
+        color: #393E92; /* Màu văn bản chuyển sang #393E92 */
+        border-color: #393E92; /* Viền chuyển sang #393E92 */
+    }
