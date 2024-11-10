@@ -84,6 +84,7 @@ namespace TaskManagement.Data.Extensions
         {
             new() {
                 Title = "Complete project documentation",
+                Code = "Test 1",
                 Description = "Prepare and complete all project documentation.",
                 CreatedAt = DateTime.Now,
                 CreatedBy = 0,
@@ -91,6 +92,7 @@ namespace TaskManagement.Data.Extensions
             },
             new() {
                 Title = "Develop authentication module",
+                Code = "Test 2",
                 Description = "Implement user authentication and authorization.",
                 CreatedAt = DateTime.Now,
                 CreatedBy = 0,

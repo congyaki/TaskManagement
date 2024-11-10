@@ -25,40 +25,9 @@ namespace TaskManagement.Controllers
         {
             if (_context.Tasks == null || !_context.Tasks.Any())
             {
-                var dummyTasks = new List<TblTask>
-        {
-            new TblTask
-            {
-                Title = "Task 1",
-                StartDate = DateTime.Now.AddDays(-10),
-                EndDate = DateTime.Now.AddDays(5),
-                Priority = 100,
-                EstimatedTime = 4.5,
-                Description = "Description of Task 1",
-                Status = "In Progress",
-                CreatedBy = "User1",
-                CreatedAt = DateTime.Now.AddDays(-15),
-                LastModifiedBy = "User2",
-                LastModifiedAt = DateTime.Now.AddDays(-1)
-            },
-            new TblTask
-            {
-
-                Title = "Task 2",
-                StartDate = DateTime.Now.AddDays(-8),
-                EndDate = DateTime.Now.AddDays(7),
-                Priority = 100,
-                EstimatedTime = 3.0,
-                Description = "Description of Task 2",
-                Status = "Completed",
-                CreatedBy = "User2",
-                CreatedAt = DateTime.Now.AddDays(-12),
-                LastModifiedBy = "User3",
-                LastModifiedAt = DateTime.Now.AddDays(-2)
-            }
-        };
-
-                return View(dummyTasks);
+                return _context.Tasks != null ?
+                                  View(await _context.Tasks.ToListAsync()) :
+                                  Problem("Entity set 'ApplicationDbContext.Tasks'  is null.");
             }
 
             return View(await _context.Tasks.ToListAsync());
