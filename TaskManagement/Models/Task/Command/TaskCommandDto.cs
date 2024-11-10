@@ -1,18 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using TaskManagement.enums;
-using TaskStatus = TaskManagement.enums.TaskStatus;
 
-namespace TaskManagement.Entities
+namespace TaskManagement.Models.Task.Command
 {
-    [Table("TBL_TASKS")]
-    public class TblTask : DomainEntity<int>
+    public class TaskCommandDto
     {
-
         [Column("TITLE")]
         public string Title { get; set; }
-        [Column("CODE")]
-        public string Code { get; set; }
 
         [Column("START_DATE")]
         public DateTime? StartDate { get; set; }
@@ -37,10 +30,8 @@ namespace TaskManagement.Entities
 
         [Column("PARENT_ID")]
         public int? ParentId { get; set; }
-        //public TblDmDepartment Department { get; set; }
-        public List<TaskLabel> TaskLabels { get; set; }
-        public List<TaskUser> TaskUsers { get; set; }
-        public List<TblComment> Comments { get; set; }
-        public List<TaskFile> TaskFiles { get; set; }
+        public IEnumerable<int> UserIds { get; set; }
+        public IEnumerable<int> LabelIds { get; set; }
+        public IFormFileCollection Files { get; set; }
     }
 }

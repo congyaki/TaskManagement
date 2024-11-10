@@ -2,10 +2,11 @@
 using BoilerPlate.Utils;
 using Microsoft.EntityFrameworkCore;
 using TaskManagement.Data;
+using TaskManagement.Entities;
 using TaskManagement.Interfaces.Services;
-using TaskManagement.Models.Requests.List;
-using TaskManagement.Models.Requests.Task.Command;
-using TaskManagement.Models.Requests.Task.Query;
+using TaskManagement.Models.Common;
+using TaskManagement.Models.Task.Command;
+using TaskManagement.Models.Task.Query;
 using TaskManagement.Utils.Dtos;
 
 namespace TaskManagement.Services
@@ -21,105 +22,95 @@ namespace TaskManagement.Services
             _context = context;
         }
 
-        public Task<bool> Assign(TaskCommandDto taskCommand)
+        public async Task<bool> Assign(TaskCommandDto taskCommand)
         {
-            //var task = _mapper.Map<TblTask>(taskCommand);
-            //task.CreatedAt = DateTime.UtcNow;
-            ////task.CreatedBy = ;
-            //await _taskRepository.AddAsync(task);
-
-            //var res = await _taskRepository.CommitAsync() > 0;
-            //if (res)
+            var task = _mapper.Map<TblTask>(taskCommand);
+            task.CreatedAt = DateTime.UtcNow;
+            task.CreatedBy = 0;
+            task.TaskLabels = taskCommand.LabelIds.Select(labelId => new TaskLabel()
+            {
+                LabelId = labelId,
+                CreatedAt = DateTime.UtcNow,
+                CreatedBy = 0,
+            }).ToList();
+            task.TaskUsers = taskCommand.UserIds.Select(userId => new TaskUser()
+            {
+                UserId = userId,
+                CreatedAt = DateTime.UtcNow,
+                CreatedBy = 0,
+            }).ToList();
+            //task.TaskFiles = taskCommand.Files.Select(userId => new TaskUser()
             //{
-            //    throw new CustomException("Có lỗi xảy ra khi giao việc !");
-            //}
+            //    UserId = userId,
+            //    CreatedAt = DateTime.UtcNow,
+            //    CreatedBy = 0,
+            //}).ToList();
+
+            await _context.AddAsync(task);
 
             //foreach (var userId in taskCommand.UserIds)
             //{
+
             //    var taskUser = new TaskUser()
             //    {
-            //        TaskId = task.Id,
             //        UserId = userId,
             //        CreatedAt = DateTime.UtcNow,
-            //        //CreatedBy = ;
+            //        CreatedBy = 0,
             //    };
-            //    await _taskUserRepository.AddAsync(taskUser);
-            //}
-
-            //res = await _taskUserRepository.CommitAsync() > 0;
-            //if (res)
-            //{
-            //    throw new CustomException("Có lỗi xảy ra khi giao việc !");
+            //    task.TaskUsers.Add(taskUser);
             //}
 
             //foreach (var labelId in taskCommand.LabelIds)
             //{
             //    var taskLabel = new TaskLabel()
             //    {
-            //        TaskId = task.Id,
             //        LabelId = labelId,
             //        CreatedAt = DateTime.UtcNow,
-            //        //CreatedBy = ;
+            //        CreatedBy = 0,
             //    };
-            //    await _taskLabelRepository.AddAsync(taskLabel);
+            //    task.TaskLabels.Add(taskLabel);
 
             //}
 
-            //res = await _taskLabelRepository.CommitAsync() > 0;
-            //if (res)
-            //{
-            //    throw new CustomException("Có lỗi xảy ra khi giao việc !");
-            //}
-
-            //return res;
-
-            throw new NotImplementedException();
-
-
+            //var res = await _context.SaveChangesAsync() > 0;
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public Task<bool> Delete(IEnumerable<int> ids)
+        public async Task<bool> Delete(IEnumerable<int> ids)
         {
-            //if (!ids.Any())
-            //    throw new CustomException("Dữ liệu không hợp lệ !");
+            if (!ids.Any())
+                throw new CustomException("Dữ liệu không hợp lệ !");
 
-            //var tasks = (await _taskRepository.GetWhereAsync(e => ids.Contains(e.Id))).ToList();
+            var tasks = await _context.Tasks.Where(e => ids.Contains(e.Id)).ToListAsync();
 
-            //if (tasks.Any())
-            //    throw new CustomException("Không tìm thấy dữ liệu để xóa !");
+            if (tasks.Any())
+                throw new NotFoundException("Không tìm thấy dữ liệu để xóa !");
 
-            //await _taskRepository.RemoveRangeAsync(tasks);
+            _context.RemoveRange(tasks);
 
-            //var res = await _taskLabelRepository.CommitAsync() > 0;
-            //if (res)
-            //{
-            //    throw new CustomException("Có lỗi xảy ra khi giao việc !");
-            //}
-            //var taskUsers = (await _taskUserRepository.GetWhereAsync(e => ids.Contains(e.TaskId))).ToList();
-            //await _taskUserRepository.RemoveRangeAsync(taskUsers);
-            //res = await _taskLabelRepository.CommitAsync() > 0;
-            //if (res)
-            //{
-            //    throw new CustomException("Có lỗi xảy ra khi giao việc !");
-            //}
-            //var taskLabels = (await _taskLabelRepository.GetWhereAsync(e => ids.Contains(e.TaskId))).ToList();
-            //await _taskLabelRepository.RemoveRangeAsync(taskLabels);
-            //res = await _taskLabelRepository.CommitAsync() > 0;
-            //if (res)
-            //{
-            //    throw new CustomException("Có lỗi xảy ra khi giao việc !");
-            //}
-
-            //return res;
-            throw new NotImplementedException();
-
-
+            return await _context.SaveChangesAsync() > 0;
         }
 
 
-        public Task<PagedResult<TaskQueryDto>> GetAllPaging(int? labelId, int? userId, string keyword, ListRequestModel request)
+        public Task<PagedResult<TaskQueryDto>> GetAllPaging(TaskPagingRequest pagingRequest)
         {
+            //var query = from t in _context.Tasks
+            //            join tl in _context.TaskLabels on t.Id equals tl.TaskId into ttl
+            //            from tl in ttl.DefaultIfEmpty()
+            //            join l in _context.Labels on tl.LabelId equals l.Id into tll
+            //            from l in tll.DefaultIfEmpty()
+
+            //            join tu in _context.TaskUsers on t.Id equals tu.TaskId into ttu
+            //            from tu in ttu.DefaultIfEmpty()
+            //            join u in _context.Users on tu.UserId equals u.Id into tuu
+            //            from u in tuu.DefaultIfEmpty()
+            //            join c in _context.Users on t.CreatedBy equals c.Id into tc
+            //            from c in tc.DefaultIfEmpty()
+            //            where t.Code != null
+            //            select new {t, l, }
+
             throw new NotImplementedException();
+
         }
 
         public Task<TaskQueryDto> GetById(int id)

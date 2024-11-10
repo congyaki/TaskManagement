@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TaskManagement.Models.Requests.List
+namespace TaskManagement.Models.Common
 {
-    public record PagingRequestBase
+    public class PagingRequestBase
     {
         public int PageIndex { get; set; }
 

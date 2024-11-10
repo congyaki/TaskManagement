@@ -1897,4 +1897,13 @@
     <None Include="wwwroot\vendor\jquery\jquery.slim.min.map" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Comment\Command\" />
+    <Folder Include="Models\Department\Command\" />
+    <Folder Include="Models\Department\Query\" />
+    <Folder Include="Models\TaskFiles\Command\" />
+    <Folder Include="Models\TaskFiles\Query\" />
+    <Folder Include="Models\User\Command\" />
+  </ItemGroup>
+
 </Project>
