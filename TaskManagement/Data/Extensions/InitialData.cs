@@ -102,8 +102,8 @@ namespace TaskManagement.Data.Extensions
 
         public static IEnumerable<TaskLabel> TaskLabels => new List<TaskLabel>()
         {
-            new() { TaskId = 1, LabelId = 2 }, // Task đầu tiên với Label đầu tiên
-            new() { TaskId = 1, LabelId = 3 }, // Task đầu tiên với Label thứ hai
+            new() { TaskId = 1, LabelId = 1 }, // Task đầu tiên với Label đầu tiên
+            new() { TaskId = 1, LabelId = 2 }, // Task đầu tiên với Label thứ hai
             new() { TaskId = 2, LabelId = 2 }  // Task thứ hai với Label đầu tiên
         };
 
