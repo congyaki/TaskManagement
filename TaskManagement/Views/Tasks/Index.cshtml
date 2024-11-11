@@ -1,4 +1,5 @@
 ﻿@model TaskManagement.Utils.Dtos.PagedResult<TaskManagement.Models.Task.Query.TaskQueryDto>
+@using TaskManagement.Utils.Dtos
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,17 +12,15 @@
 <table class="tabledpm">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Items.FirstOrDefault().Title)</th>
-            <th>@Html.DisplayNameFor(model => model.Items.FirstOrDefault().StartDate)</th>
-            <th>@Html.DisplayNameFor(model => model.Items.FirstOrDefault().EndDate)</th>
-            <th>@Html.DisplayNameFor(model => model.Items.FirstOrDefault().Priority)</th>
-            <th>@Html.DisplayNameFor(model => model.Items.FirstOrDefault().EstimatedTime)</th>
-            <th>@Html.DisplayNameFor(model => model.Items.FirstOrDefault().Description)</th>
-            <th>@Html.DisplayNameFor(model => model.Items.FirstOrDefault().Status)</th>
-            <th>@Html.DisplayNameFor(model => model.Items.FirstOrDefault().CreatedBy)</th>
-            <th>@Html.DisplayNameFor(model => model.Items.FirstOrDefault().CreatedAt)</th>
-            <th>Actions</th>
-            <th></th>
+            <th>Tiêu đề</th>
+            <th>Ngày bắt đầu</th>
+            <th>Ngày kết thúc</th>
+            <th>Mức độ ưu tiên</th>
+            <th>Nhãn dán</th>
+            <th>Mô tả</th>
+            <th>Trạng thái</th>
+            <th>Người tạo</th>
+            <th>Thao tác</th>
         </tr>
     </thead>
     <tbody>
@@ -67,6 +66,6 @@
     </tbody>
 </table>
 
-<div class="pagination">
-    Page @Model.PageIndex of @Model.PageCount
-</div>
+@* <div class="pagination"> *@
+    @await Component.InvokeAsync("Pager", Model)
+@* </div> *@
