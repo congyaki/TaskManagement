@@ -8,6 +8,7 @@ namespace TaskManagement.Models.Task.Query
 {
     public class TaskQueryDto
     {
+        public int Id { get; set; }
         [Column("TITLE")]
         public string Title { get; set; }
 
@@ -27,7 +28,7 @@ namespace TaskManagement.Models.Task.Query
         public string Description { get; set; }
 
         [Column("STATUS")]
-        public TaskStatus Status { get; set; }
+        public string Status { get; set; }
 
         //[Column("DEPARTMENT_ID")]
         //public int DepartmentId { get; set; }
@@ -35,6 +36,11 @@ namespace TaskManagement.Models.Task.Query
         [Column("PARENT_ID")]
         public int? ParentId { get; set; }
         //public TblDmDepartment Department { get; set; }
+        [Column("CREATED_BY")]
+        public int? CreatedBy { get; set; }
+
+        [Column("CREATED_AT")]
+        public DateTime? CreatedAt { get; set; }
         public List<LabelQueryDto> Labels { get; set; }
         public List<UserQueryDto> Users { get; set; }
         public List<CommentQueryDto> Comments { get; set; }

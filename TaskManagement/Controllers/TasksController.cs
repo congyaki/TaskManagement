@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TaskManagement.Data;
 using TaskManagement.Entities;
+using TaskManagement.Interfaces.Services;
+using TaskManagement.Models.Task.Command;
 using TblTask = TaskManagement.Entities.TblTask;
 
 namespace TaskManagement.Controllers
@@ -14,14 +16,16 @@ namespace TaskManagement.Controllers
     public class TasksController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly ITaskService _taskService;
 
-        public TasksController(AppDbContext context)
+        public TasksController(AppDbContext context, ITaskService taskService)
         {
             _context = context;
+            _taskService = taskService;
         }
 
         // GET: Tasks
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(TaskPagingRequest request)
         {
             if (_context.Tasks == null || !_context.Tasks.Any())
             {
@@ -29,8 +33,7 @@ namespace TaskManagement.Controllers
                                   View(await _context.Tasks.ToListAsync()) :
                                   Problem("Entity set 'ApplicationDbContext.Tasks'  is null.");
             }
-
-            return View(await _context.Tasks.ToListAsync());
+            return View(await _taskService.GetAllPaging(request));
         }
 
         // GET: Tasks/Details/5
@@ -41,8 +44,8 @@ namespace TaskManagement.Controllers
                 return NotFound();
             }
 
-            var task = await _context.Tasks
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var task = await _taskService.GetById(id.Value);
+
             if (task == null)
             {
                 return NotFound();

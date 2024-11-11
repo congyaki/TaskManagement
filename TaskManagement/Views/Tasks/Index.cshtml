@@ -1,5 +1,4 @@
-﻿@model IEnumerable<TaskManagement.Entities.TblTask>
-
+﻿@model TaskManagement.Utils.Dtos.PagedResult<TaskManagement.Models.Task.Query.TaskQueryDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,32 +12,21 @@
 <table class="tabledpm">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Priority)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedBy)
-            </th>
+            <th>@Html.DisplayNameFor(model => model.Items.FirstOrDefault().Title)</th>
+            <th>@Html.DisplayNameFor(model => model.Items.FirstOrDefault().StartDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Items.FirstOrDefault().EndDate)</th>
+            <th>@Html.DisplayNameFor(model => model.Items.FirstOrDefault().Priority)</th>
+            <th>@Html.DisplayNameFor(model => model.Items.FirstOrDefault().EstimatedTime)</th>
+            <th>@Html.DisplayNameFor(model => model.Items.FirstOrDefault().Description)</th>
+            <th>@Html.DisplayNameFor(model => model.Items.FirstOrDefault().Status)</th>
+            <th>@Html.DisplayNameFor(model => model.Items.FirstOrDefault().CreatedBy)</th>
+            <th>@Html.DisplayNameFor(model => model.Items.FirstOrDefault().CreatedAt)</th>
+            <th>Actions</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Items) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
@@ -68,12 +56,6 @@
                 @Html.DisplayFor(modelItem => item.CreatedAt)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LastModifiedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastModifiedAt)
-            </td>
-            <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
@@ -82,3 +64,7 @@
 }
     </tbody>
 </table>
+
+<div class="pagination">
+    Page @Model.PageIndex of @Model.PageCount
+</div>

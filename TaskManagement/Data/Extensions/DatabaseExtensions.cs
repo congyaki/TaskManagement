@@ -28,7 +28,7 @@ namespace TaskManagement.Data.Extensions
             await SeedUserAsync(context, serviceProvider);
             await SeedLabelAsync(context);
             await SeedTaskAsync(context);
-
+            await SeedTaskLabelAsync(context);
         }
 
         private static async Task SeedRoleAsync(AppDbContext context, IServiceProvider serviceProvider)
@@ -102,6 +102,15 @@ namespace TaskManagement.Data.Extensions
             if (!await context.Tasks.AnyAsync())
             {
                 await context.Tasks.AddRangeAsync(InitialData.Tasks);
+                await context.SaveChangesAsync();
+            }
+        }
+
+        private static async Task SeedTaskLabelAsync(AppDbContext context)
+        {
+            if (!await context.TaskLabels.AnyAsync())
+            {
+                await context.TaskLabels.AddRangeAsync(InitialData.TaskLabels);
                 await context.SaveChangesAsync();
             }
         }
