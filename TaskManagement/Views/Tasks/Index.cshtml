@@ -21,8 +21,6 @@
             <th>Trạng thái</th>
             <th>Người tạo</th>
             <th>Thao tác</th>
-            <th>Actions</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -37,14 +35,31 @@
             <td>
                 @Html.DisplayFor(modelItem => item.EndDate)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Priority)
-            </td>
+                <td>
+                    @switch (item.Priority)
+                    {
+                        case 1:
+                            <span class="text-danger">Cao</span>
+                            break;
+                        case 2:
+                            <span class="text-warning">Khá cao</span>
+                            break;
+                        case 3:
+                            <span class="text-primary">Trung bình</span>
+                            break;
+                        case 4:
+                            <span class="text-muted">Thấp</span>
+                            break;
+                        default:
+                            <span>Không xác định</span>
+                            break;
+                    }
+                </td>
             <td>
                     @foreach (var label in item.Labels)
 
                     {
-                        <p style="color: @label.Color;">@Html.DisplayFor(modelItem => label.Name)</p>
+                        <p style="background-color: @label.Color;">@Html.DisplayFor(modelItem => label.Name)</p>
  
                     }
             </td>
