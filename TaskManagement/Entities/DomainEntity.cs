@@ -11,6 +11,7 @@ namespace TaskManagement.Entities
         public virtual T Id { get; set; }
 
         [Column("CREATED_BY")]
+        [Display(Name = "Tạo bởi")]
         public int? CreatedBy { get; set; }
 
         [Column("CREATED_AT")]
