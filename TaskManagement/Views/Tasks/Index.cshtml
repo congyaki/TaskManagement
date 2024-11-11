@@ -5,11 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="font-weight-bol">DANH SÁCH CÔNG VIỆC</h1>
-
-<p>
-    <a asp-action="Create">Thêm Công Viêc</a>
-</p>
+<div class="mb-4 d-flex justify-content-between align-items-center">
+    <h2>DANH SÁCH CÔNG VIỆC</h2>
+    <a class="btn-custom" asp-action="Create">Thêm Công Việc</a>
+</div>
 <table class="tabledpm">
     <thead>
         <tr>
@@ -53,9 +52,6 @@
                 @Html.DisplayFor(modelItem => item.Priority)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EstimatedTime)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
@@ -64,19 +60,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedBy)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastModifiedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastModifiedAt)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            <td>         
+               <a asp-action="Edit" asp-route-id="@item.Id" class="text-warning mr-3">
+                 <i class="fas fa-edit"></i>
+               </a>
+               <a asp-action="Details" asp-route-id="@item.Id" class="text-info mr-3">
+                 <i class="fas fa-info-circle"></i>
+               </a>
+               <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger">
+                 <i class="fas fa-trash-alt"></i>
+               </a>
             </td>
         </tr>
 }
