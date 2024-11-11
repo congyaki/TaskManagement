@@ -8,14 +8,18 @@ namespace TaskManagement.Entities
     {
 
         [Column("CODE")]
+        [Display(Name="Mã nhãn")]
         public string Code { get; set; }
 
         [Column("NAME")]
+        [Display(Name = "Tên nhãn")]
         public string Name { get; set; }
         [Column("DESCRIPTION")]
+        [Display(Name = "Mô Tả")]
         public string Description { get; set; }
 
         [Column("COLOR")]
+        [Display(Name = "Màu nhãn")]
         public string Color { get; set; }
         public List<TaskLabel> TaskLabels { get; set; }
     }
