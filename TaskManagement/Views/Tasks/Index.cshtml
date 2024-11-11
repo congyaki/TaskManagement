@@ -1,4 +1,5 @@
 ﻿@model TaskManagement.Utils.Dtos.PagedResult<TaskManagement.Models.Task.Query.TaskQueryDto>
+@using TaskManagement.Utils.Dtos
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,6 +21,8 @@
             <th>Trạng thái</th>
             <th>Người tạo</th>
             <th>Thao tác</th>
+            <th>Actions</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -71,6 +74,6 @@
     </tbody>
 </table>
 
-<div class="pagination">
-    Page @Model.PageIndex of @Model.PageCount
-</div>
+@* <div class="pagination"> *@
+    @await Component.InvokeAsync("Pager", Model)
+@* </div> *@
