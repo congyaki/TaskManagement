@@ -33,7 +33,8 @@ namespace TaskManagement.Controllers
                                   View(await _context.Tasks.ToListAsync()) :
                                   Problem("Entity set 'ApplicationDbContext.Tasks'  is null.");
             }
-            return View(await _taskService.GetAllPaging(request));
+            var res = await _taskService.GetAllPaging(request);
+            return View(res);
         }
 
         // GET: Tasks/Details/5
