@@ -10,7 +10,6 @@
     int daysRemaining = 0;
     int hoursRemaining = 0;
 
-    // Tính số ngày và giờ còn lại
     if (endDate > now)
     {
         TimeSpan remainingDuration = endDate - now;
@@ -18,14 +17,13 @@
         hoursRemaining = remainingDuration.Hours;
     }
 
-    // Tính phần trăm tiến trình
     double progressPercentage = 0;
     if (endDate > startDate)
     {
         TimeSpan totalDuration = endDate - startDate;
         TimeSpan elapsedDuration = now - startDate;
         progressPercentage = (elapsedDuration.TotalMilliseconds / totalDuration.TotalMilliseconds) * 100;
-        progressPercentage = Math.Clamp(progressPercentage, 0, 100); // Giới hạn trong khoảng 0 - 100%
+        progressPercentage = Math.Clamp(progressPercentage, 0, 100);
     }
 }
 
@@ -110,23 +108,3 @@
         <i class="fas fa-edit"></i> Chỉnh sửa
     </a>
 </div>
-
-<style>
-    .progress-bar {
-        font-weight: bold;
-        color: white;
-        text-align: center;
-    }
-
-    .card {
-        border-radius: 10px;
-    }
-
-    .card-body {
-        background-color: #f9f9f9;
-    }
-
-    h1 {
-        font-family: 'Arial', sans-serif;
-    }
-</style>

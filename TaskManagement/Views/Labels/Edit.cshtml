@@ -71,14 +71,9 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     <script>
-        // Thiết lập màu ban đầu cho color picker
         document.getElementById("colorPicker").value = document.getElementById("colorCode").value;
-
-        // Cập nhật mã màu khi người dùng chọn màu mới
         document.getElementById("colorPicker").addEventListener("input", function () {
             document.getElementById("colorCode").value = this.value;
         });
     </script>
 }
-
-

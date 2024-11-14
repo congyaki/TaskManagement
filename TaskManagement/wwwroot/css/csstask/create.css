@@ -28,3 +28,20 @@ hr{
 .textarea {
     margin-left: 45px;
 }
+.progress-bar {
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+.card {
+    border-radius: 10px;
+}
+
+.card-body {
+    background-color: #f9f9f9;
+}
+
+h1 {
+    font-family: 'Arial', sans-serif;
+}
