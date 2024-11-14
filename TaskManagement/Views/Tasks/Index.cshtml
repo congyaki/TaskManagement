@@ -58,7 +58,7 @@
             <td>
                     @foreach (var label in item.Labels)
                     {
-                        <span class="badge me-auto p-2" style="background-color: @label.Color;">@Html.DisplayFor(modelItem => label.Name)</span>
+                        <span class="badge me-auto p-2" style="background-color: @label.Color; color: #fff">@Html.DisplayFor(modelItem => label.Name)</span>
                     }
             </td>
             <td>

@@ -5,16 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
-
 <div class="container mt-5">
 
     <div class="card shadow-lg border-0 rounded-15" style="background-color: #f8f9fa;">
         <div class="card-body p-4">
-            <h4 class="card-title text-secondary font-weight-bold mb-3">Thông tin bộ môn</h4>
+            <h4 class="card-title text-secondary font-weight-bold mb-3">Thông tin nhãn dán</h4>
             <hr />
-
-            <div class="d-flex justify-content-center detail-content">
+            <div class="d-flex">
                 <dl class="row">
                     <dt class="col-sm-3 text-secondary font-weight-bold">
                         <i class="fas fa-barcode "></i> @Html.DisplayNameFor(model => model.Code)
@@ -46,16 +43,14 @@
                 </dl>
             </div>
             
-
-            <div class="d-flex justify-content-end mt-4">
-                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn-custom">
-                    <i class="fas fa-edit"></i> Chỉnh sửa
-                </a>
-            </div>
-            <div class="text-center mt-3">
-                <a asp-action="Index" class="btn btn-link text-secondary">← Trở về</a>
-            </div>
         </div>
+
+    </div>
+    <div class="text-center mt-3">
+        <a asp-action="Index" class="btn btn-link text-secondary">← Trở về</a>
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn-custom">
+            <i class="fas fa-edit"></i> Chỉnh sửa
+        </a>
     </div>
 </div>
 

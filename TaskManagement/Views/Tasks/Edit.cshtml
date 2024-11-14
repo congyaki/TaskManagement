@@ -5,91 +5,95 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<div class="row justify-content-center pt-3">
+    <div class="col-md-8">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <h4 class="card-title text-center text-secondary">Chỉnh sửa công việc</h4>
+                <hr />
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
 
-<h4>Task</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                    <div class="form-group mb-3">
+                        <label asp-for="Title" class="form-label fw-bold">Tiêu đề công việc</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-clipboard"></i></span>
+                            <input asp-for="Title" class="form-control" placeholder="Nhập tiêu đề công việc" />
+                        </div>
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="StartDate" class="form-label fw-bold">Ngày bắt đầu</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
+                            <input asp-for="StartDate" type="date" class="form-control" />
+                        </div>
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="EndDate" class="form-label fw-bold">Ngày kết thúc</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                            <input asp-for="EndDate" type="date" class="form-control" />
+                        </div>
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Priority" class="form-label fw-bold">Độ ưu tiên</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-exclamation-circle"></i></span>
+                            <select asp-for="Priority" class="form-control">
+                                <option value="1">Thấp</option>
+                                <option value="2">Trung bình</option>
+                                <option value="3">Cao</option>
+                            </select>
+                        </div>
+                        <span asp-validation-for="Priority" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Description" class="form-label fw-bold">Mô tả</label>
+                        <textarea asp-for="Description" class="form-control" id="description"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Status" class="form-label fw-bold">Trạng thái</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-tasks"></i></span>
+                            <input asp-for="Status" class="form-control" placeholder="Nhập trạng thái công việc" />
+                        </div>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="CreatedBy" class="form-label fw-bold">Người tạo</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            <input asp-for="CreatedBy" class="form-control" />
+                        </div>
+                        <span asp-validation-for="CreatedBy" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="d-flex justify-content-end mt-4">
+                        <input type="submit" value="Lưu công việc" class="btn-custom" />
+                    </div>
+                </form>
+
+                <div class="text-center mt-3">
+                    <a asp-action="Index" class="btn btn-link text-secondary">← Trở về</a>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="StartDate" class="control-label"></label>
-                <input asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EndDate" class="control-label"></label>
-                <input asp-for="EndDate" class="form-control" />
-                <span asp-validation-for="EndDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Priority" class="control-label"></label>
-                <input asp-for="Priority" class="form-control" />
-                <span asp-validation-for="Priority" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EstimatedTime" class="control-label"></label>
-                <input asp-for="EstimatedTime" class="form-control" />
-                <span asp-validation-for="EstimatedTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedBy" class="control-label"></label>
-                <input asp-for="CreatedBy" class="form-control" />
-                <span asp-validation-for="CreatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedAt" class="control-label"></label>
-                <input asp-for="CreatedAt" class="form-control" />
-                <span asp-validation-for="CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastModifiedBy" class="control-label"></label>
-                <input asp-for="LastModifiedBy" class="form-control" />
-                <span asp-validation-for="LastModifiedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastModifiedAt" class="control-label"></label>
-                <input asp-for="LastModifiedAt" class="form-control" />
-                <span asp-validation-for="LastModifiedAt" class="text-danger"></span>
-            </div>
-            @* <div class="form-group">
-                <label asp-for="DepartmentId" class="control-label"></label>
-                <select asp-for="DepartmentId" class="form-control" asp-items="ViewBag.DepartmentId"></select>
-                <span asp-validation-for="DepartmentId" class="text-danger"></span>
-            </div> *@
-            <div class="form-group">
-                <label asp-for="ParentId" class="control-label"></label>
-                <select asp-for="ParentId" class="form-control" asp-items="ViewBag.ParentId"></select>
-                <span asp-validation-for="ParentId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -45,8 +45,8 @@ td {
     background-color: #FF5D71;
     background-image: linear-gradient(180deg,#FF5D71 10%,#dda20a 100%);
 }
-.detail-content{
-    margin-left: 150px;
+.detail-content {
+    margin-left: 350px;
 }
 .inputtask {
     display: block;
