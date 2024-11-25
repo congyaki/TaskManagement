@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TaskManagement.Data;
 using TaskManagement.Entities;
+using TaskManagement.enums;
 using TaskManagement.Interfaces.Services;
 using TaskManagement.Models.Task.Command;
 using TblTask = TaskManagement.Entities.TblTask;
@@ -58,7 +60,34 @@ namespace TaskManagement.Controllers
         // GET: Tasks/Create
         public IActionResult Create()
         {
-            return View();
+            var users = _context.Users.Select(u => new SelectListItem
+            {
+                Value = u.Id.ToString(),
+                Text = u.UserName
+            }).ToList();
+
+            var labels = _context.Labels.Select(u => new SelectListItem
+            {
+                Value = u.Id.ToString(),
+                Text = u.Name
+            }).ToList();
+
+            var priorities = Enum.GetValues(typeof(TaskPriority))
+            .Cast<TaskPriority>()
+            .Select(e => new SelectListItem
+            {
+                Value = ((int)e).ToString(), // Giá trị của enum
+                Text = e.ToString() // Tên của enum
+            }).ToList();
+
+            var model = new TaskCommandDto
+            {
+                Priorities = priorities,
+                Users = users,
+                Labels = labels
+            };
+
+            return View(model);
         }
 
         // POST: Tasks/Create
@@ -66,15 +95,18 @@ namespace TaskManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,StartDate,EndDate,Priority,EstimatedTime,Description,Status,CreatedBy,CreatedAt,LastModifiedBy,LastModifiedAt,DepartmentId,ParentId")] TblTask task)
+        public async Task<IActionResult> Create(TaskCommandDto request)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(task);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var res = await _taskService.Assign(request);
+                if (res)
+                    return RedirectToAction(nameof(Index));
+
+                return View(request);
+
             }
-            return View(task);
+            return View(request);
         }
 
         // GET: Tasks/Edit/5

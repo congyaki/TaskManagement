@@ -17,15 +17,15 @@ namespace TaskManagement.Entities
 
         [Display(Name = "Thời gian bắt đầu")]
         [Column("START_DATE")]
-        public DateTime? StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         [Display(Name ="Thời gian kết thúc")]
         [Column("END_DATE")]
-        public DateTime? EndDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         [Display(Name = "Mức độ ưu tiên")]
         [Column("PRIORITY")]
-        public int? Priority { get; set; }
+        public TaskPriority Priority { get; set; }
 
         [Column("ESTIMATED_TIME")]
         public double? EstimatedTime { get; set; }

@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations.Schema;
+using TaskManagement.Entities;
+using TaskManagement.enums;
 
 namespace TaskManagement.Models.Task.Command
 {
@@ -6,15 +9,17 @@ namespace TaskManagement.Models.Task.Command
     {
         [Column("TITLE")]
         public string Title { get; set; }
+        [Column("CODE")]
+        public string Code { get; set; }
 
         [Column("START_DATE")]
-        public DateTime? StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         [Column("END_DATE")]
-        public DateTime? EndDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         [Column("PRIORITY")]
-        public int? Priority { get; set; }
+        public TaskPriority SelectedPriority { get; set; }
 
         [Column("ESTIMATED_TIME")]
         public double? EstimatedTime { get; set; }
@@ -23,15 +28,20 @@ namespace TaskManagement.Models.Task.Command
         public string Description { get; set; }
 
         [Column("STATUS")]
-        public TaskStatus Status { get; set; }
+        public enums.TaskStatus Status { get; set; }
 
         //[Column("DEPARTMENT_ID")]
         //public int DepartmentId { get; set; }
 
         [Column("PARENT_ID")]
         public int? ParentId { get; set; }
-        public IEnumerable<int> UserIds { get; set; }
-        public IEnumerable<int> LabelIds { get; set; }
-        public IFormFileCollection Files { get; set; }
+        public IEnumerable<int> SelectedUserIds { get; set; }
+        public IEnumerable<int> SelectedLabelIds { get; set; }
+        public IFormFile[]? SelectedFiles { get; set; }
+        public IEnumerable<SelectListItem>? Users { get; set; }
+
+        public IEnumerable<SelectListItem>? Labels { get; set; }
+        public IEnumerable<SelectListItem>? Priorities { get; set; }
+
     }
 }

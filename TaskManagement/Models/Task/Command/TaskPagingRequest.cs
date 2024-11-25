@@ -1,4 +1,5 @@
-﻿using TaskManagement.Models.Common;
+﻿using TaskManagement.enums;
+using TaskManagement.Models.Common;
 
 namespace TaskManagement.Models.Task.Command
 {
@@ -7,8 +8,8 @@ namespace TaskManagement.Models.Task.Command
         public string Keyword { get; set; }
         public int? LabelId { get; set; }
         public int? UserId { get; set; }
-        public int? Priority { get; set; }
-        public TaskStatus? Status { get; set; }
+        public TaskPriority? Priority { get; set; }
+        public enums.TaskStatus? Status { get; set; }
 
     }
 }

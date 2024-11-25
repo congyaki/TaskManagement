@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BoilerPlate.Utils;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using TaskManagement.Data;
 using TaskManagement.Entities;
 using TaskManagement.Interfaces.Services;
@@ -17,30 +18,53 @@ namespace TaskManagement.Services
     {
         private readonly IMapper _mapper;
         private readonly AppDbContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public TaskService(IMapper mapper, AppDbContext context)
+        public TaskService(IMapper mapper, AppDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _mapper = mapper;
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<bool> Assign(TaskCommandDto taskCommand)
         {
-            var task = _mapper.Map<TblTask>(taskCommand);
-            task.CreatedAt = DateTime.UtcNow;
-            task.CreatedBy = 0;
-            task.TaskLabels = taskCommand.LabelIds.Select(labelId => new TaskLabel()
+            // Lấy UserId từ HttpContext.User
+            var userIdClaim = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
             {
-                LabelId = labelId,
-                CreatedAt = DateTime.UtcNow,
-                CreatedBy = 0,
-            }).ToList();
-            task.TaskUsers = taskCommand.UserIds.Select(userId => new TaskUser()
+                throw new Exception("Bạn chưa đăng nhập !");
+            }
+            var currentUserId = int.Parse(userIdClaim.Value);
+            
+            var task = new TblTask()
             {
-                UserId = userId,
+                Title = taskCommand.Title,
+                Code = taskCommand.Code,
+                Description = taskCommand.Description,
+                Priority = taskCommand.SelectedPriority,
+                StartDate = taskCommand.StartDate,
+                EndDate = taskCommand.EndDate,
+                EstimatedTime = taskCommand.EstimatedTime,
                 CreatedAt = DateTime.UtcNow,
-                CreatedBy = 0,
-            }).ToList();
+                CreatedBy = currentUserId,
+                ParentId = taskCommand.ParentId,
+                TaskLabels = taskCommand.SelectedLabelIds.Select(labelId => new TaskLabel()
+                {
+                    LabelId = labelId,
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedBy = 0,
+                }).ToList(),
+                TaskUsers = taskCommand.SelectedUserIds.Select(userId => new TaskUser()
+                {
+                    UserId = userId,
+                    CreatedAt = DateTime.UtcNow,
+                    CreatedBy = 0,
+                }).ToList(),
+
+                Status = enums.TaskStatus.Assigned,
+            };
+
             //task.TaskFiles = taskCommand.Files.Select(userId => new TaskUser()
             //{
             //    UserId = userId,
@@ -110,37 +134,39 @@ namespace TaskManagement.Services
             //            where t.Code != null
             //            select new { t, l, };
 
-            var query = _context.Tasks
-            .Include(t => t.TaskLabels) // Tải trước TaskLabels cho mỗi Task
-            .ThenInclude(tl => tl.Label) // Tải trước Label cho mỗi TaskLabel
-            .Include(t => t.TaskUsers)
-            .ThenInclude(tu => tu.User)
-            .Select(t => new TaskQueryDto
-            {
-                Id = t.Id,
-                Title = t.Title,
-                Description = t.Description,
-                StartDate = t.StartDate,
-                EndDate = t.EndDate,
-                Priority = t.Priority,
-                EstimatedTime = t.EstimatedTime,
-                Status = t.Status,
-                CreatedAt = t.CreatedAt,
-                CreatedBy = t.CreatedBy,
-                Labels = t.TaskLabels.Select(tl => new LabelQueryDto
-                {
-                    Id = tl.Label.Id,
-                    Name = tl.Label.Name,
-                    Color = tl.Label.Color
-                }).ToList(),
-                Users = t.TaskUsers.Select(tu => new UserQueryDto
-                {
-                    Id = tu.User.Id,
-                    UserName = tu.User.UserName,
-                    Email = tu.User.Email,
-                    PhoneNumber = tu.User.PhoneNumber,
-                }).ToList()
-            });
+            var query = from task in _context.Tasks
+                        join user in _context.Users
+                            on task.CreatedBy equals user.Id into userGroup
+                        from user in userGroup.DefaultIfEmpty() // Đảm bảo LEFT JOIN
+                        select new TaskQueryDto
+                        {
+                            Id = task.Id,
+                            Title = task.Title,
+                            Description = task.Description,
+                            StartDate = task.StartDate,
+                            EndDate = task.EndDate,
+                            Priority = task.Priority,
+                            EstimatedTime = task.EstimatedTime,
+                            Status = task.Status,
+                            CreatedAt = task.CreatedAt,
+                            CreatedBy = task.CreatedBy,
+                            CreatedByName = user != null ? user.UserName : null,
+                            Labels = task.TaskLabels.Select(tl => new LabelQueryDto
+                            {
+                                Id = tl.Label.Id,
+                                Name = tl.Label.Name,
+                                Color = tl.Label.Color
+                            }).ToList(),
+                            Users = task.TaskUsers.Select(tu => new UserQueryDto
+                            {
+                                Id = tu.User.Id,
+                                UserName = tu.User.UserName,
+                                Email = tu.User.Email,
+                                PhoneNumber = tu.User.PhoneNumber,
+                            }).ToList()
+                        };
+
+
 
             if (!string.IsNullOrWhiteSpace(request.Keyword))
             {
@@ -176,41 +202,40 @@ namespace TaskManagement.Services
 
         public async Task<TaskQueryDto> GetById(int id)
         {
-            var task = await _context.Tasks
-                .Where(e => e.Id == id)
-                .Include(t => t.TaskLabels) // Tải trước TaskLabels cho mỗi Task
-                    .ThenInclude(tl => tl.Label) // Tải trước Label cho mỗi TaskLabel
-                .Include(t => t.TaskUsers)
-                    .ThenInclude(tu => tu.User)
-                .Select(t => new TaskQueryDto
-                {
-                    Id = t.Id,
-                    Title = t.Title,
-                    Description = t.Description,
-                    StartDate = t.StartDate,
-                    EndDate = t.EndDate,
-                    Priority = t.Priority,
-                    EstimatedTime = t.EstimatedTime,
-                    Status = t.Status,
-                    CreatedAt = t.CreatedAt,
-                    CreatedBy = t.CreatedBy,
-                    Labels = t.TaskLabels.Select(tl => new LabelQueryDto
-                    {
-                        Id = tl.Label.Id,
-                        Name = tl.Label.Name,
-                        Color = tl.Label.Color
-                    }).ToList(),
-                    Users = t.TaskUsers.Select(tu => new UserQueryDto
-                    {
-                        Id = tu.User.Id,
-                        UserName = tu.User.UserName,
-                        Email = tu.User.Email,
-                        PhoneNumber = tu.User.PhoneNumber,
-                    }).ToList()
-                }).FirstOrDefaultAsync()
+            var query = await (from task in _context.Tasks
+                             join user in _context.Users
+                                 on task.CreatedBy equals user.Id into userGroup
+                             from user in userGroup.DefaultIfEmpty() // Đảm bảo LEFT JOIN
+                             select new TaskQueryDto
+                             {
+                                 Id = task.Id,
+                                 Title = task.Title,
+                                 Description = task.Description,
+                                 StartDate = task.StartDate,
+                                 EndDate = task.EndDate,
+                                 Priority = task.Priority,
+                                 EstimatedTime = task.EstimatedTime,
+                                 Status = task.Status,
+                                 CreatedAt = task.CreatedAt,
+                                 CreatedBy = task.CreatedBy,
+                                 CreatedByName = user != null ? user.UserName : null,
+                                 Labels = task.TaskLabels.Select(tl => new LabelQueryDto
+                                 {
+                                     Id = tl.Label.Id,
+                                     Name = tl.Label.Name,
+                                     Color = tl.Label.Color
+                                 }).ToList(),
+                                 Users = task.TaskUsers.Select(tu => new UserQueryDto
+                                 {
+                                     Id = tu.User.Id,
+                                     UserName = tu.User.UserName,
+                                     Email = tu.User.Email,
+                                     PhoneNumber = tu.User.PhoneNumber,
+                                 }).ToList()
+                             }).FirstOrDefaultAsync()
                 ?? throw new CustomException("");
 
-            return task;
+            return query;
         }
 
         public Task<bool> Update(int id, TaskCommandDto taskCommand)

@@ -46,6 +46,8 @@ builder.Services.AddTransient<IDepartmentService, DepartmentService>();
 builder.Services.AddTransient<ILabelService, LabelService>();
 builder.Services.AddTransient<ITaskService, TaskService>();
 
+builder.Services.AddHttpContextAccessor();
+
 var assembly = typeof(Program).Assembly;
 builder.Services.AddAutoMapper(assembly);
 //Tương đương code trên

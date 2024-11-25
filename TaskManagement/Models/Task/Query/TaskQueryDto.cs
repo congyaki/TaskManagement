@@ -18,15 +18,15 @@ namespace TaskManagement.Models.Task.Query
 
         [Column("START_DATE")]
         [Display(Name = "Thời gian bắt đầu")]
-        public DateTime? StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         [Column("END_DATE")]
         [Display(Name = "Thời gian kết thúc")]
-        public DateTime? EndDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         [Column("PRIORITY")]
         [Display(Name = "Mức độ ưu tiên")]
-        public int? Priority { get; set; }
+        public TaskPriority Priority { get; set; }
 
         [Column("ESTIMATED_TIME")]
         public double? EstimatedTime { get; set; }
@@ -48,6 +48,8 @@ namespace TaskManagement.Models.Task.Query
         [Column("CREATED_BY")]
         [Display(Name = "Người tạo")]
         public int? CreatedBy { get; set; }
+        [Display(Name = "Tên người tạo")]
+        public string CreatedByName { get; set; }
 
         [Column("CREATED_AT")]
         public DateTime? CreatedAt { get; set; }

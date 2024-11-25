@@ -39,6 +39,9 @@ namespace TaskManagement.Data.Configurations
 
             builder.Property(t => t.Status)
                 .HasConversion<string>();
+
+            builder.Property(t => t.Priority)
+                .HasConversion<string>();
         }
     }
 }
