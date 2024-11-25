@@ -11,13 +11,19 @@ namespace TaskManagement.Data.Extensions
         public static IEnumerable<User> Users => new List<User>()
         {
             new() {
-                UserName = "admin@example.com",
+                UserName = "Admin",
+                Code = "01",
+                FirstName = "Đức Công",
+                LastName = "Đỗ",
                 Email = "admin@example.com",
                 EmailConfirmed = true,
                 DepartmentId = 1,
             },
             new() {
-                UserName = "user@example.com",
+                UserName = "User01",
+                Code = "02",
+                FirstName = "Thiên Long",
+                LastName = "Vũ",
                 Email = "user@example.com",
                 EmailConfirmed = true,
                 DepartmentId = 2,

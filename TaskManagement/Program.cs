@@ -28,7 +28,8 @@ builder.Services.AddIdentity<User, Role>(options => options.SignIn.RequireConfir
 builder.Services.Configure<IdentityOptions>(options =>
 {
     // Overwrite Default User settings.
-    
+    options.SignIn.RequireConfirmedAccount = false;
+    options.Tokens.AuthenticatorIssuer = null;
     options.User.RequireUniqueEmail = true;
 
 });

@@ -23,15 +23,15 @@
             <form id="account" method="post" class="login__form">
                 <div class="login__content grid">
                     <div class="login__box">      
-                        <input asp-for="Input.Email" class="login__input" id="floatingEmail" placeholder="name@example.com" autocomplete="username" aria-required="true" />
+                        <input asp-for="Input.UserName" class="login__input" id="floatingEmail" autocomplete="username" aria-required="true" />
                         <label class="login__label" for="floatingEmail">Tên người dùng,  Email hoặc Mã nhân viên</label>
-                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        <span asp-validation-for="Input.UserName" class="text-danger"></span>
 
                         <i class="ri-mail-fill login__icon"></i>
                     </div>
 
                     <div class="login__box">
-                        <input asp-for="Input.Password" type="password" class="login__input" id="floatingPassword" placeholder="Password" autocomplete="current-password" aria-required="true" />
+                        <input asp-for="Input.Password" type="password" class="login__input" id="floatingPassword" autocomplete="current-password" aria-required="true" />
                         <label class="login__label" for="floatingPassword">Mật khẩu</label>
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                         <i class="ri-eye-off-fill login__icon login__password" id="Password"></i>

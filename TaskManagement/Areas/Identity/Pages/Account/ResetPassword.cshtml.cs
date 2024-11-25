@@ -67,7 +67,7 @@ namespace TaskManagement.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            //[Required]
             public string Code { get; set; }
 
         }
@@ -80,13 +80,30 @@ namespace TaskManagement.Areas.Identity.Pages.Account
             }
             else
             {
-                Input = new InputModel
+                try
                 {
-                    Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
-                };
-                return Page();
+                    // Thêm đệm '=' nếu cần thiết để đảm bảo chiều dài của chuỗi là một bội số của 4
+                    int paddingRequired = 4 - (code.Length % 4);
+                    if (paddingRequired != 4)
+                    {
+                        code = code.PadRight(code.Length + paddingRequired, '=');
+                    }
+
+                    // Giải mã Base64Url
+                    Input = new InputModel
+                    {
+                        Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
+                    };
+
+                    return Page();
+                }
+                catch (FormatException)
+                {
+                    return BadRequest("The provided code is invalid.");
+                }
             }
         }
+
 
         public async Task<IActionResult> OnPostAsync()
         {

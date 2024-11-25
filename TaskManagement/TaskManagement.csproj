@@ -41,6 +41,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Identity\Pages\Role\AddRoleUser.cshtml" />
+    <None Include="Areas\Identity\Pages\Role\Index.cshtml" />
+    <None Include="Areas\Identity\Pages\Role\ResetPassword.cshtml" />
+    <None Include="Areas\Identity\Pages\Role\User.cshtml" />
+    <None Include="Areas\Identity\Pages\Role\_StatusMessage.cshtml" />
+    <None Include="Areas\Identity\Pages\Role\_ViewImports.cshtml" />
+    <None Include="Areas\Identity\Pages\Role\_ViewStart.cshtml" />
     <None Include="wwwroot\css\sb-admin-2.css" />
     <None Include="wwwroot\css\sb-admin-2.min.css" />
     <None Include="wwwroot\img\undraw_posting_photo.svg" />
