@@ -5,27 +5,62 @@
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<h3>@ViewData["Title"]</h3>
 <partial name="_StatusMessage" for="StatusMessage" />
-<div class="row">
-    <div class="col-md-6">
-        <form id="profile-form" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
-                <input asp-for="Username" class="form-control" disabled />
-                <label asp-for="Username" class="form-label"></label>
-            </div>
-            <div class="form-floating">
-                <input asp-for="Input.DepartmentId" class="form-control" />
-                <label asp-for="Input.DepartmentId" class="form-label"></label>
-            </div>
-            <div class="form-floating">
-                <input asp-for="Input.PhoneNumber" class="form-control" />
-                <label asp-for="Input.PhoneNumber" class="form-label"></label>
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-            </div>
-            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
-        </form>
+<div class="d-flex justify-content-center align-items-center ">
+    <div class="card shadow-lg p-4" style="max-width: 600px; width: 100%; border-radius: 15px;">
+        <div class="card-body">
+            <h2 class="text-center card-customized-header mb-4">Thông tin tài khoản</h2>
+
+            <form id="profile-form" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="Username" class="font-weight-bold">Tên người dùng</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-light">
+                                <i class="fa-solid fa-user"></i>
+                            </span>
+                        </div>
+                        <input asp-for="Username" class="form-control" placeholder="Nhập mã bộ môn" />
+                    </div>
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="Input.DepartmentId" class="font-weight-bold">Phòng ban</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-light">
+                                <i class="fas fa-building text-muted"></i>
+                            </span>
+                        </div>
+                        <input asp-for="Input.DepartmentId" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Input.DepartmentId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="Input.PhoneNumber" class="font-weight-bold">Số điện thoại</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-light">
+                                <i class="fa-solid fa-phone"></i>
+                            </span>
+                        </div>
+                        <input asp-for="Input.PhoneNumber" class="form-control"/>
+                    </div>
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-end mt-4">
+                    <button id="update-profile-button" type="submit" class="btn-custom">Lưu</button>
+                </div>
+                <div class="text-center mt-3">
+                    <a asp-action="Index" class="btn btn-link text-secondary">← Trở về</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

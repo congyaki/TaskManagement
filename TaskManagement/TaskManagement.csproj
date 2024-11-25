@@ -1904,6 +1904,7 @@
     <Folder Include="Models\TaskFiles\Command\" />
     <Folder Include="Models\TaskFiles\Query\" />
     <Folder Include="Models\User\Command\" />
+    <Folder Include="wwwroot\css\login\" />
   </ItemGroup>
 
 </Project>

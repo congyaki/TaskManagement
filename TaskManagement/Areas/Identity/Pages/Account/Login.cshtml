@@ -5,54 +5,48 @@
     ViewData["Title"] = "Log in";
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
+<link rel="stylesheet" href="~/css/login/assets/css/styles.css">
 
-@* <h1>@ViewData["Title"]</h1> *@
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-    <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px;">
-        <div class="text-center mb-4">
-            <h2 class="h3 mb-3 font-weight-normal">Đăng nhập vào tài khoản của bạn</h2>
-            <p class="text-muted">Hãy điền vào thông tin đăng nhập để tiếp tục</p>
+<svg class="login__blob" viewBox="0 0 850 900" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0)">
+        <image href="/css/login/assets/img/lgkhoa.jpg" x="0" y="0" width="800" height="900" />
+    </g>
+</svg>
+
+<div class="login container grid" id="loginAccess">
+    <div class="login__access">
+        <h1 class="login__title">Đăng nhập</h1>
+
+        <div class="login__area">
+            <form id="account" method="post" class="login__form">
+                <div class="login__content grid">
+                    <div class="login__box">      
+                        <input asp-for="Input.Email" class="login__input" id="floatingEmail" placeholder="name@example.com" autocomplete="username" aria-required="true" />
+                        <label class="login__label" for="floatingEmail">Tên người dùng,  Email hoặc Mã nhân viên</label>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+
+                        <i class="ri-mail-fill login__icon"></i>
+                    </div>
+
+                    <div class="login__box">
+                        <input asp-for="Input.Password" type="password" class="login__input" id="floatingPassword" placeholder="Password" autocomplete="current-password" aria-required="true" />
+                        <label class="login__label" for="floatingPassword">Mật khẩu</label>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        <i class="ri-eye-off-fill login__icon login__password" id="Password"></i>
+                    </div>
+                </div>
+
+                <a href="#" class="login__forgot">Quên mật khẩu?</a>
+
+                <button id="login-submit" type="submit" class="login__button">Đăng nhập</button>
+            </form>
         </div>
-        <form id="account" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div> 
 
-            <!-- Email Field -->
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" id="floatingEmail" placeholder="name@example.com" autocomplete="username" aria-required="true" />
-                <label for="floatingEmail">Tên người dùng,  Email hoặc Mã nhân viên</label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-
-            <!-- Password Field -->
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Password" type="password" class="form-control" id="floatingPassword" placeholder="Password" autocomplete="current-password" aria-required="true" />
-                <label for="floatingPassword">Mật khẩu</label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-
-            <!-- Remember Me Checkbox -->
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" asp-for="Input.RememberMe" id="rememberMeCheck" />
-                <label class="form-check-label" for="rememberMeCheck">
-                    Lưu tài khoản
-                </label>
-            </div>
-
-            <!-- Submit Button -->
-            <div class="d-grid mb-3">
-                <button id="login-submit" type="submit" class="btn btn-primary btn-lg">Đăng nhập</button>
-            </div>
-
-            <!-- Links -->
-            <div class="text-center">
-                <a id="forgot-password" asp-page="./ForgotPassword" class="text-decoration-none">Quên mật khẩu ?</a>
-                <span class="mx-2">|</span>
-                <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="text-decoration-none">Gửi OTP để xác nhận</a>
-            </div>
-        </form>
-    </div>
-</div>
-
+   
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="~/css/login/assets/js/main.js"></script> 
 }
