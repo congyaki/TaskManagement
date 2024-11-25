@@ -64,7 +64,7 @@
                          aria-valuenow="@progressPercentage"
                          aria-valuemin="0"
                          aria-valuemax="100"
-                         style="width: @progressPercentage%; background-color: #28a745;">
+                         style="width: @progressPercentage%; background-color: #28a745; color: #000">
                         Còn @daysRemaining ngày và @hoursRemaining giờ
                     </div>
                 </div>
@@ -72,9 +72,28 @@
 
             <dt class="col-sm-3 text-secondary font-weight-bold">
                 @Html.DisplayNameFor(model => model.Priority)
+                
             </dt>
             <dd class="col-sm-9 text-dark">
-                @Html.DisplayFor(model => model.Priority)
+                @* @Html.DisplayFor(model => model.Priority) *@
+                @switch (Model.Priority)
+                {
+                    case 1:
+                        <span class="text-danger">Cao</span>
+                        break;
+                    case 2:
+                        <span class="text-warning">Khá cao</span>
+                        break;
+                    case 3:
+                        <span class="text-primary">Trung bình</span>
+                        break;
+                    case 4:
+                        <span class="text-muted">Thấp</span>
+                        break;
+                    default:
+                        <span>Không xác định</span>
+                        break;
+                }
             </dd>
 
             <dt class="col-sm-3 text-secondary font-weight-bold">
@@ -92,10 +111,10 @@
             </dd>
 
             <dt class="col-sm-3 text-secondary font-weight-bold">
-                @Html.DisplayNameFor(model => model.CreatedBy)
+                @Html.DisplayNameFor(model => model.CreatedAt)
             </dt>
             <dd class="col-sm-9 text-dark">
-                @Html.DisplayFor(model => model.CreatedBy)
+                @Html.DisplayFor(model => model.CreatedAt)
             </dd>
 
         </dl>

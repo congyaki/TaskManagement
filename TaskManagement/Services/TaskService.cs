@@ -124,7 +124,7 @@ namespace TaskManagement.Services
                 EndDate = t.EndDate,
                 Priority = t.Priority,
                 EstimatedTime = t.EstimatedTime,
-                Status = t.Status.ToString(),
+                Status = t.Status,
                 CreatedAt = t.CreatedAt,
                 CreatedBy = t.CreatedBy,
                 Labels = t.TaskLabels.Select(tl => new LabelQueryDto
@@ -158,7 +158,7 @@ namespace TaskManagement.Services
                 query = query.Where(e => e.Status.ToString().ToLower() == request.Status.Value.ToString().ToLower());
             }
 
-            query = query.OrderByDescending(e => e.CreatedAt);
+            query = query.OrderBy(e => e.CreatedAt);
 
             int totalRecords = await query.CountAsync();
 
@@ -191,7 +191,7 @@ namespace TaskManagement.Services
                     EndDate = t.EndDate,
                     Priority = t.Priority,
                     EstimatedTime = t.EstimatedTime,
-                    Status = t.Status.ToString(),
+                    Status = t.Status,
                     CreatedAt = t.CreatedAt,
                     CreatedBy = t.CreatedBy,
                     Labels = t.TaskLabels.Select(tl => new LabelQueryDto

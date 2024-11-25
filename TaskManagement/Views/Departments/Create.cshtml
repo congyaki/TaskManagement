@@ -8,7 +8,7 @@
 <div class="d-flex justify-content-center align-items-center ">
     <div class="card shadow-lg p-4" style="max-width: 600px; width: 100%; border-radius: 15px;">
         <div class="card-body">
-            <h2 class="text-center card-customized-header mb-4">Tạo Mới Bộ Môn</h2>
+            <h2 class="text-center card-customized-header mb-4">Thêm bộ Môn</h2>
 
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -59,7 +59,7 @@
 </div>
 
 @section Scripts {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script> *@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }

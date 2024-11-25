@@ -27,12 +27,12 @@
                     @Html.DisplayFor(model => model.Name)
                 </dd>
 
-                <dt class="col-sm-3 text-secondary font-weight-bold">
+                @* <dt class="col-sm-3 text-secondary font-weight-bold">
                     <i class="fas fa-user "></i> @Html.DisplayNameFor(model => model.CreatedBy)
                 </dt>
                 <dd class="col-sm-9 text-dark">
                     @Html.DisplayFor(model => model.CreatedBy)
-                </dd>
+                </dd> *@
 
                 <dt class="col-sm-3 text-secondary font-weight-bold">
                     <i class="fas fa-calendar-alt"></i> @Html.DisplayNameFor(model => model.CreatedAt)
@@ -42,12 +42,12 @@
                     @Html.DisplayFor(model => model.CreatedAt, "{0:MM/dd/yyyy HH:mm}")
                 </dd>
 
-                <dt class="col-sm-3 text-secondary font-weight-bold">
+                @* <dt class="col-sm-3 text-secondary font-weight-bold">
                     <i class="fas fa-user-edit"></i> @Html.DisplayNameFor(model => model.LastModifiedBy)
                 </dt>
                 <dd class="col-sm-9 text-dark">
                     @Html.DisplayFor(model => model.LastModifiedBy)
-                </dd>
+                </dd> *@
 
                 <dt class="col-sm-3 text-secondary font-weight-bold">
                     <i class="fas fa-calendar-check"></i> @Html.DisplayNameFor(model => model.LastModifiedAt)
@@ -68,5 +68,5 @@
 </div>
 
 @section Scripts {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script> *@
 }

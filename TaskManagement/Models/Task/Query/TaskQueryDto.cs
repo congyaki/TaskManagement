@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TaskManagement.Entities;
+using TaskManagement.enums;
 using TaskManagement.Models.Comment.Query;
 using TaskManagement.Models.Label.Query;
 using TaskManagement.Models.User.Query;
+using TaskStatus = TaskManagement.enums.TaskStatus;
 
 namespace TaskManagement.Models.Task.Query
 {
@@ -35,7 +37,7 @@ namespace TaskManagement.Models.Task.Query
 
         [Column("STATUS")]
         [Display(Name = "Trạng thái")]
-        public string Status { get; set; }
+        public TaskStatus Status { get; set; }
 
         //[Column("DEPARTMENT_ID")]
         //public int DepartmentId { get; set; }

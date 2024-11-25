@@ -11,7 +11,7 @@ namespace TaskManagement.Models.Common
         public PagingRequestBase()
         {
             PageIndex = 1;
-            PageSize = 50;
+            PageSize = 10;
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿@model TaskManagement.Utils.Dtos.PagedResult<TaskManagement.Models.Task.Query.TaskQueryDto>
+@using TaskManagement.Helpers
 @using TaskManagement.Utils.Dtos
+@using TaskManagement.Utils.Extensions
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -58,14 +60,16 @@
             <td>
                     @foreach (var label in item.Labels)
                     {
-                        <span class="badge me-auto p-2" style="background-color: @label.Color; color: #fff">@Html.DisplayFor(modelItem => label.Name)</span>
+                        <span class="badge me-auto p-2 mb-1" style="background-color: @label.Color; color: #fff">@Html.DisplayFor(modelItem => label.Name)</span>
                     }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                <span class="p-2 badge" style="background-color: @item.Status.GetStatusColor(); color: #fff">
+                    @Html.GetEnumDisplayName(item.Status)
+                </span>
             </td>
 
             <td>
@@ -87,6 +91,6 @@
     </tbody>
 </table>
 
-@* <div class="pagination"> *@
+<div class="pagination mt-3">
     @await Component.InvokeAsync("Pager", Model)
-@* </div> *@
+</div>

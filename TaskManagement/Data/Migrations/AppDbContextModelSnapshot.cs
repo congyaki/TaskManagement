@@ -195,7 +195,7 @@ namespace TaskManagement.Migrations
 
                     b.HasIndex("TaskId");
 
-                    b.ToTable("TBL_TASK_FILES");
+                    b.ToTable("TBL_TASK_FILES", (string)null);
                 });
 
             modelBuilder.Entity("TaskManagement.Entities.TaskLabel", b =>
@@ -237,7 +237,7 @@ namespace TaskManagement.Migrations
 
                     b.HasIndex("TaskId");
 
-                    b.ToTable("TBL_TASK_LABELS");
+                    b.ToTable("TBL_TASK_LABELS", (string)null);
                 });
 
             modelBuilder.Entity("TaskManagement.Entities.TaskUser", b =>
@@ -279,7 +279,7 @@ namespace TaskManagement.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("TBL_TASK_USERS");
+                    b.ToTable("TBL_TASK_USERS", (string)null);
                 });
 
             modelBuilder.Entity("TaskManagement.Entities.TblComment", b =>
@@ -326,7 +326,7 @@ namespace TaskManagement.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("TBL_COMMENTS");
+                    b.ToTable("TBL_COMMENTS", (string)null);
                 });
 
             modelBuilder.Entity("TaskManagement.Entities.TblDmDepartment", b =>
@@ -371,7 +371,7 @@ namespace TaskManagement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TBL_DM_DEPARTMENTS");
+                    b.ToTable("TBL_DM_DEPARTMENTS", (string)null);
                 });
 
             modelBuilder.Entity("TaskManagement.Entities.TblDmLabel", b =>
@@ -421,7 +421,7 @@ namespace TaskManagement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TBL_DM_LABELS");
+                    b.ToTable("TBL_DM_LABELS", (string)null);
                 });
 
             modelBuilder.Entity("TaskManagement.Entities.TblFailedJob", b =>
@@ -479,7 +479,7 @@ namespace TaskManagement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TBL_FAILED_JOBS");
+                    b.ToTable("TBL_FAILED_JOBS", (string)null);
                 });
 
             modelBuilder.Entity("TaskManagement.Entities.TblJob", b =>
@@ -531,7 +531,7 @@ namespace TaskManagement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TBL_JOBS");
+                    b.ToTable("TBL_JOBS", (string)null);
                 });
 
             modelBuilder.Entity("TaskManagement.Entities.TblTask", b =>
@@ -601,7 +601,7 @@ namespace TaskManagement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TBL_TASKS");
+                    b.ToTable("TBL_TASKS", (string)null);
                 });
 
             modelBuilder.Entity("TaskManagement.Entities.User", b =>

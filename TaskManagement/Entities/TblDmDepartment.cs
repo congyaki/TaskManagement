@@ -15,6 +15,8 @@ namespace TaskManagement.Entities
         [Display(Name = "Tên bộ môn")]
         public string Name { get; set; }
         [Column("DESCRIPTION")]
+        [Display(Name = "Mô tả")]
+
         public string Description { get; set; }
 
         public List<User> Users { get; set; }
